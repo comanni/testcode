@@ -2,17 +2,23 @@
 
 
 function log(sRoomID, sTimeID) {
+var startH = sTimeID.substring(0, 2);
+startH = Number(startH)
+var endM = sTimeID.substring(3, 2);
+var endH;
+if (startH == 9) {
+    endH = 10;
+} else{
+    endH = startH + 1
+}
 
 if ($("#sTitle").length > 0 )  { 
 
   }
   else{
     var sTitle = $('<span id=\'sTitle\' style=\'none\'>domTest</span>');
-    var sRoomID = $('<span id=\'sRoomID\' style=\'none\'>domTest</span>');
-    var sTimeID= $('<span id=\'sTimeID\' style=\'none\'>domTest</span>');
-    $("#DeltaSPWebPartManager").after(sTitle)}
-    $("#DeltaSPWebPartManager").after(sRoomID)}
-    $("#DeltaSPWebPartManager").after(sTimeID)}
+     $("#DeltaSPWebPartManager").after(sTitle)}
+
 $.ajax({
     type: 'POST',
     url: 'Office_Data.aspx',
@@ -21,7 +27,7 @@ $.ajax({
     async: false,
     success: function (resultData) {
         roomfind(resultData);
-        console.log($("#sTitle"));
+        console.log(endH);
     },
     error: function (resultData) {
         alert(resultData.ExceptionMessage);
@@ -44,21 +50,6 @@ fnRegResv = log;
 
 
 
-function getRoom() {
-    $.ajax({
-        type: 'POST',
-        url: 'Office_Data.aspx',
-        data: { RequestName: 'ROOMINFO', ROOMID: sRoom_ID },
-        dataType: 'json',
-        async: false,
-        success: function (resultData) {
-            fnBindRoomInfo(resultData);
-        },
-        error: function (resultData) {
-            alert(resultData.ExceptionMessage);
-        }
-    });
-}
 
 // 룸번호, 시간 등
 $.ajax({
