@@ -3,15 +3,20 @@
 
 function log(sRoomID, sTimeID) {
 var startH = sTimeID.substring(0, 2);
-startH = Number(startH)
-var endM = sTimeID.substring(3, 5);
+    startH = Number(startH)
+
 var endH;
+var endM = sTimeID.substring(3, 5);
+
 if (startH == 9) {
     startH = "0" + startH
     endH = 10;
-} else{
+    }
+    
+    else {
     endH = startH + 1
-}
+    }
+
 var oStart_Date = _SelectedDate + " " + startH + ":" + endM;
 var oEnd_Date  = _SelectedDate + " " + endH + ":" + endM;
 
@@ -25,7 +30,7 @@ if ($("#sTitle").length > 0 )  {
     }
 
     //해당 시간에 예약이 있는지 확인
-var Result = fnReserveChk();
+var Result = fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date);
 
 var oBEGIN_DATE = "";
 var oEND_DATE = "";
@@ -44,7 +49,7 @@ if (oUSER_NM != "") {
 }
 
 //동일 시간대 같은 그룹의 회의실을 예약 하였는지 확인
-Result = fnReserveChk2();
+Result = fnReserveChk2(sRoom_ID, oStart_Date, oEnd_Date);
 
 for (var i in Result) {                
     oROOM_NAME = Result[i].ROOM_NAME; 
@@ -165,42 +170,7 @@ function fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date){
   
       return Result;
   }    
-  
-  function fnCheckField(sRoom_ID, oStart_Date, oEnd_Date) {
-
-    var Result = fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date);
-
-var oBEGIN_DATE = "";
-var oEND_DATE = "";
-var oUSER_NM = "";
-var oROOM_NAME = "";
-
-for (var i in Result) {
-    oBEGIN_DATE = Result[i].BEGIN_DATE;
-    oEND_DATE = Result[i].END_DATE;
-    oUSER_NM = Result[i].USER_NM; 
-}             
-
-if (oUSER_NM != "") {
-    alert(oBEGIN_DATE.substring(0, oBEGIN_DATE.length - 3) + " ~ " + oEND_DATE.substring(0, oEND_DATE.length - 3) + "까지 " +  oUSER_NM + "님이 이미 예약 하셨습니다.");  
-    return;
-}
-
-//동일 시간대 같은 그룹의 회의실을 예약 하였는지 확인
-Result = fnReserveChk2(sRoom_ID, oStart_Date, oEnd_Date);
-
-for (var i in Result) {                
-    oROOM_NAME = Result[i].ROOM_NAME; 
-}   
-
-if (sAdmin_Auth1 != "1" && sAdmin_Auth3 != "1") {
-    if (oROOM_NAME != "") {
-        alert("동일 시간에 같은 그룹의 회의실을 예약 하였습니다. \r\n회의실 명: " + oROOM_NAME);  
-        return;
-    }
-}
-             fnSave_Reserve();
-}
+ 
 
 fnRegResv = log;
 $(document.body).append('<div id="ry-message" style="position:fixed;top:10px;left:50%;width:90%;margin-left:-45%;padding:10px 0;background-color:rgba(0,0,0,0.5);color:white;font-size:15px;text-align:center;">1시간 단위 원클릭 예약 활성화 중</div>');
