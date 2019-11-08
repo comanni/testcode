@@ -4,20 +4,58 @@
 function log(sRoomID, sTimeID) {
 var startH = sTimeID.substring(0, 2);
 startH = Number(startH)
-var endM = sTimeID.substring(3, 2);
+var endM = sTimeID.substring(3, 5);
 var endH;
 if (startH == 9) {
+    startH = "0" + startH
     endH = 10;
 } else{
     endH = startH + 1
 }
+var oStart_Date = _SelectedDate + " " + startH + ":" + endM;
+var oEnd_Date  = _SelectedDate + " " + endH + ":" + endM;
 
+// sTitle이 없으면 생성
 if ($("#sTitle").length > 0 )  { 
 
   }
   else{
-    var sTitle = $('<span id=\'sTitle\' style=\'none\'>domTest</span>');
-     $("#DeltaSPWebPartManager").after(sTitle)}
+    var sTitle = $('<span id=\'sTitle\' style=\'display:none\'>domTest</span>');
+     $("#DeltaSPWebPartManager").after(sTitle)
+    }
+
+    //해당 시간에 예약이 있는지 확인
+var Result = fnReserveChk();
+
+var oBEGIN_DATE = "";
+var oEND_DATE = "";
+var oUSER_NM = "";
+var oROOM_NAME = "";
+
+for (var i in Result) {
+    oBEGIN_DATE = Result[i].BEGIN_DATE;
+    oEND_DATE = Result[i].END_DATE;
+    oUSER_NM = Result[i].USER_NM; 
+}             
+
+if (oUSER_NM != "") {
+    alert(oBEGIN_DATE.substring(0, oBEGIN_DATE.length - 3) + " ~ " + oEND_DATE.substring(0, oEND_DATE.length - 3) + "까지 " +  oUSER_NM + "님이 이미 예약 하셨습니다.");  
+    return;
+}
+
+//동일 시간대 같은 그룹의 회의실을 예약 하였는지 확인
+Result = fnReserveChk2();
+
+for (var i in Result) {                
+    oROOM_NAME = Result[i].ROOM_NAME; 
+}   
+
+if (sAdmin_Auth1 != "1" && sAdmin_Auth3 != "1") {
+    if (oROOM_NAME != "") {
+        alert("동일 시간에 같은 그룹의 회의실을 예약 하였습니다. \r\n회의실 명: " + oROOM_NAME);  
+        return;
+    }
+}
 
 $.ajax({
     type: 'POST',
@@ -27,7 +65,9 @@ $.ajax({
     async: false,
     success: function (resultData) {
         roomfind(resultData);
-        console.log(endH);
+        var oRoomInfo = $("#sTitle").text();
+        resvRequest(sRoomID, oStart_Date, oEnd_Date, oRoomInfo, _SelectedDate)
+        
     },
     error: function (resultData) {
         alert(resultData.ExceptionMessage);
@@ -46,97 +86,138 @@ var goods;
     });
            
 }
-fnRegResv = log;
-
-
-
-
-// 룸번호, 시간 등
-$.ajax({
-    type: 'POST',
-    url: 'Office_Data.aspx',
-    data: { RequestName: 'GETRESVLIST', SelectedDate: selectedDate, CalCategory: sCalCategory, sOrderBy: "", sDir: "" },
-    dataType: 'json',
-    async: true,
-    success: function (resultData) {
-        test(resultData);
-    },
-    error: function (resultData) {
-        alert(resultData.ExceptionMessage);
+function resvRequest(sRoomID, oStart_Date, oEnd_Date, oRoomInfo, _SelectedDate) {
+    $.ajax({
+        type: 'POST',
+        url: 'Office_Data.aspx',
+        data: { 
+        RequestName: 'SAVE_RESERVE', 
+        ROOMID: sRoomID,
+        TITLE: "프로젝트1셀", 
+        ATTEND_ID: "180118|" ,
+        ATTEND_MAIL: "harry@lotte.net|" ,
+        ATTEND_NM: "최승혁, " , 
+        REFERRERS_ID: "" ,
+        REFERRERS_MAIL: "" ,
+        REFERRERS_NM: "" , 
+        ALERT_TYPE: "0" ,
+        START_DATE: oStart_Date , 
+        END_DATE: oEnd_Date , 
+        BODY:"" , 
+        FILEINFO: "", 
+        REGMAIL: "harry@lotte.net", 
+        REGNM: "최승혁",
+        REPEAT: "N" ,
+        ROOMINFO: oRoomInfo },
+        dataType: 'json',
+        async: false,
+        success: function (resultData) {
+            Result = resultData.CREATESUCCESS
+        },
+        error: function (resultData) {
+            alert(resultData.ExceptionMessage)
     }
-})
-// function test 시작
-const arrayindex = value.indexOf(sRoomID);
+    })	
+    if (Result == "OK") {
+        alert("예약이 저장 되었습니다.");
+        CalendarDate_Clicked(_SelectedDate);
+        getMyResv();
+    
+    }
+}
 
-
-
-  //예약 저장
-  function fnSave_Reserve(){
-      fn_ShowLoading();
-      var oTitle ="프로젝트 1셀";
-      var oAttend_ID = fnGetNode("1", "ID");
-      var oAttend_MAIL = fnGetNode("1", "MAIL");
-      //참석자 이름
-      var oAttend_NM = fnGetNode("1", "NM");
-
-      //참조자 ID
-      var oReferrers_ID = fnGetNode("2", "ID");
-      //참조자 MAIL
-      var oReferrers_MAIL = fnGetNode("2", "MAIL");
-      //참조자 이름
-      var oReferrers_NM = fnGetNode("2", "NM");
-
-      //알림방법
-      var oAlert_Type =  "1";
-      //alert(oAlert_Type);
-
-      var startH = (($("#startH").val() < 10) ? "0" : "") + $("#startH").val();
-      var startM = (($("#startM").val() < 10) ? "0" : "") + $("#startM").val();
-      var endH = (($("#endH").val() < 10) ? "0" : "") + $("#endH").val();
-      var endM = (($("#endM").val() < 10) ? "0" : "") + $("#endM").val();
-                 
-      //시작시간
-      var oStart_Date = $("#txtStartDate").val() + " " + startH + ":" + startM;
-      //종료시간
-      var oEnd_Date  = $("#txtEndDate").val() + " " + endH + ":" + endM;
-
-      //본문내용
-      var oBody  = "";
-      //파일정보
-      var oFileInfo = ""
-
-      //작성자 메일
-      //작성자 이름
-      var oRegMail = "harry@lotte.net";
-      var oRegNM = "최승혁";
-      
-      //위치정보
-      var oRoomInfo = sTitle.innerText;
-
-      var Result = null;
-
-         
-          $.ajax({
-              type: 'POST',
-              url: 'Office_Data.aspx',
-              data: { RequestName: 'SAVE_RESERVE', ROOMID: sRoom_ID, TITLE: oTitle, ATTEND_ID: oAttend_ID , ATTEND_MAIL: oAttend_MAIL , ATTEND_NM: oAttend_NM , REFERRERS_ID: oReferrers_ID , REFERRERS_MAIL: oReferrers_MAIL , REFERRERS_NM: oReferrers_NM , ALERT_TYPE: oAlert_Type , START_DATE: oStart_Date , END_DATE: oEnd_Date , BODY: oBody , FILEINFO: oFileInfo, REGMAIL: oRegMail, REGNM: oRegNM, REPEAT: "N" , ROOMINFO: oRoomInfo},
-              dataType: 'json',
-              async: false,
-              success: function (resultData) {
-                  Result = resultData.CREATESUCCESS
-              },
-              error: function (resultData) {
-                  alert(resultData.ExceptionMessage);
-                  fn_HideLoading();
-              }
-          });
-      }            
-
-      if (Result == "OK") {
-          alert("예약이 저장 되었습니다.");
-          opener.CalendarDate_Clicked($("#txtStartDate").val());
-          opener.getMyResv();
-          fn_HideLoading();
-          this.close();
-      }
+function fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date){
+    var Result = null;
+      $.ajax({
+          type: 'POST',
+          url: 'Office_Data.aspx',
+          data: { RequestName: 'CHECKROOM', ROOMID: sRoom_ID, STARTDATE: oStart_Date, ENDDATE: oEnd_Date, RESERVEID: "0" },
+          dataType: 'json',
+          async: false,
+          success: function (resultData) {
+              Result = resultData.ROOMCHEK
+          },
+          error: function (resultData) {
+              alert(resultData.ExceptionMessage);
+          }
+      });
   
+      return Result;
+  }        
+  
+  //동일 시간대에 같은 그룹의 회의길을 예약 하였는지 확인
+  function fnReserveChk2(sRoom_ID, oStart_Date, oEnd_Date){
+  
+      var Result = null;
+      $.ajax({
+          type: 'POST',
+          url: 'Office_Data.aspx',
+          data: { RequestName: 'CHECKGROUP', ROOMID: sRoom_ID, STARTDATE: oStart_Date, ENDDATE: oEnd_Date, RESERVEID: "0" },
+          dataType: 'json',
+          async: false,
+          success: function (resultData) {
+              Result = resultData.ROOMCHEK
+          },
+          error: function (resultData) {
+              alert(resultData.ExceptionMessage);
+          }
+      });
+  
+      return Result;
+  }    
+  
+  function fnCheckField(sRoom_ID, oStart_Date, oEnd_Date) {
+
+    var Result = fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date);
+
+var oBEGIN_DATE = "";
+var oEND_DATE = "";
+var oUSER_NM = "";
+var oROOM_NAME = "";
+
+for (var i in Result) {
+    oBEGIN_DATE = Result[i].BEGIN_DATE;
+    oEND_DATE = Result[i].END_DATE;
+    oUSER_NM = Result[i].USER_NM; 
+}             
+
+if (oUSER_NM != "") {
+    alert(oBEGIN_DATE.substring(0, oBEGIN_DATE.length - 3) + " ~ " + oEND_DATE.substring(0, oEND_DATE.length - 3) + "까지 " +  oUSER_NM + "님이 이미 예약 하셨습니다.");  
+    return;
+}
+
+//동일 시간대 같은 그룹의 회의실을 예약 하였는지 확인
+Result = fnReserveChk2(sRoom_ID, oStart_Date, oEnd_Date);
+
+for (var i in Result) {                
+    oROOM_NAME = Result[i].ROOM_NAME; 
+}   
+
+if (sAdmin_Auth1 != "1" && sAdmin_Auth3 != "1") {
+    if (oROOM_NAME != "") {
+        alert("동일 시간에 같은 그룹의 회의실을 예약 하였습니다. \r\n회의실 명: " + oROOM_NAME);  
+        return;
+    }
+}
+             fnSave_Reserve();
+}
+
+fnRegResv = log;
+$(document.body).append('<div id="ry-message" style="position:fixed;top:10px;left:50%;width:90%;margin-left:-45%;padding:10px 0;background-color:rgba(0,0,0,0.5);color:white;font-size:15px;text-align:center;">1시간 단위 원클릭 예약 활성화 중</div>');
+
+
+====
+
+      
+
+    
+}        
+
+
+
+
+// sreserve ID 확인하기
+
+
+
+
