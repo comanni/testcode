@@ -1,25 +1,57 @@
 
-
-
 function log(sRoomID, sTimeID) {
-var startH = sTimeID.substring(0, 2);
-    startH = Number(startH)
+    var timelength = $('input[name="timecheck"]:checked').val()
+    var startH = sTimeID.substring(0, 2);
+        startH = Number(startH)
+    
+    var endH;
+    var startM = sTimeID.substring(3, 5);
+    var endM = sTimeID.substring(3, 5);
+    
+    switch(timelength) {
+        case "1" :
+            if (startM == "30") {
+                if (startH == 9) {
+                    startH = "0" + startH
+                    endH = 10;
+                    }
+                else {
+                endH = startH + 1
+                }
+                endM = "00"
+    
+                var oStart_Date = _SelectedDate + " " + startH + ":" + startM;
+                var oEnd_Date  = _SelectedDate + " " + endH + ":" + endM;
 
-var endH;
-var endM = sTimeID.substring(3, 5);
+                }
+            
+            else {
+                if (startH == 9) {
+                    startH = "0" + startH
+                    }
+                endH = startH
+                endM = "30"
+    
+                var oStart_Date = _SelectedDate + " " + startH + ":" + startM;
+                var oEnd_Date  = _SelectedDate + " " + endH + ":" + endM;
 
-if (startH == 9) {
-    startH = "0" + startH
-    endH = 10;
+            }
+            break;
+        case "2" :
+                if (startH == 9) {
+                    startH = "0" + startH
+                    endH = 10;
+                    }
+                    
+                    else {
+                    endH = startH + 1
+                    }
+                
+                var oStart_Date = _SelectedDate + " " + startH + ":" + endM;
+                var oEnd_Date  = _SelectedDate + " " + endH + ":" + endM;
+            break;
     }
     
-    else {
-    endH = startH + 1
-    }
-
-var oStart_Date = _SelectedDate + " " + startH + ":" + endM;
-var oEnd_Date  = _SelectedDate + " " + endH + ":" + endM;
-
 // sTitle이 없으면 생성
 if ($("#sTitle").length > 0 )  { 
 
@@ -31,7 +63,7 @@ if ($("#sTitle").length > 0 )  {
 
     //해당 시간에 예약이 있는지 확인
 var Result = fnReserveChk(sRoomID, oStart_Date, oEnd_Date);
-
+console.log(sRoomID)
 var oBEGIN_DATE = "";
 var oEND_DATE = "";
 var oUSER_NM = "";
@@ -55,12 +87,10 @@ for (var i in Result) {
     oROOM_NAME = Result[i].ROOM_NAME; 
 }   
 
-if (sAdmin_Auth1 != "1" && sAdmin_Auth3 != "1") {
-    if (oROOM_NAME != "") {
+if (oROOM_NAME != "") {
         alert("동일 시간에 같은 그룹의 회의실을 예약 하였습니다. \r\n회의실 명: " + oROOM_NAME);  
         return;
     }
-}
 
 $.ajax({
     type: 'POST',
@@ -92,13 +122,14 @@ var goods;
            
 }
 function resvRequest(sRoomID, oStart_Date, oEnd_Date, oRoomInfo, _SelectedDate) {
+    var modifiedtitle = $("#resvrequest").val()
     $.ajax({
         type: 'POST',
         url: 'Office_Data.aspx',
         data: { 
         RequestName: 'SAVE_RESERVE', 
         ROOMID: sRoomID,
-        TITLE: "프로젝트1셀", 
+        TITLE: modifiedtitle, 
         ATTEND_ID: "180118|" ,
         ATTEND_MAIL: "harry@lotte.net|" ,
         ATTEND_NM: "최승혁, " , 
@@ -131,7 +162,7 @@ function resvRequest(sRoomID, oStart_Date, oEnd_Date, oRoomInfo, _SelectedDate) 
     }
 }
 
-function fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date){
+function fnReserveChk(sRoomID, oStart_Date, oEnd_Date){
     var Result = null;
       $.ajax({
           type: 'POST',
@@ -151,7 +182,7 @@ function fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date){
   }        
   
   //동일 시간대에 같은 그룹의 회의길을 예약 하였는지 확인
-  function fnReserveChk2(sRoom_ID, oStart_Date, oEnd_Date){
+  function fnReserveChk2(sRoomID, oStart_Date, oEnd_Date){
   
       var Result = null;
       $.ajax({
@@ -173,4 +204,7 @@ function fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date){
  
 
 fnRegResv = log;
-$(document.body).append('<div id="ry-message" style="position:fixed;top:10px;left:50%;width:90%;margin-left:-45%;padding:10px 0;background-color:rgba(0,0,0,0.5);color:white;font-size:15px;text-align:center;">1시간 단위 원클릭 예약 활성화 중</div>');
+
+$(document.body).append('<div id="ry-message" style="position:fixed;top:10px;left:50%;width:90%;margin-left:-45%;padding:10px 0;background-color:rgba(0,0,0,0.5);color:white;font-size:15px;text-align:center;">원클릭 예약 활성화 중</div>');
+$(".tab_booking_category > ul:last-child").append('<div id="timebox" style="right:30px;"><h>예약 시간 단위 : </h><span class="ms-RadioText" title="쪽지"><input type="radio" name="timecheck" value="1" checked="checked"><label>30분</label><input type="radio" name="timecheck" value="2"><label>1시간</label></span></div>')
+$(".tab_booking_category > ul:last-child").append('<div id="requestbox" style="right:30px;padding-top:10px;"><h><nobr>예약명 : </nobr></h><span dir="none"><input name="resvrequest" type="text" id="resvrequest" maxlength="100" title="회의제목" autocomplete="off" value="프로젝트1셀"></span>')
