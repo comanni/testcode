@@ -30,7 +30,7 @@ if ($("#sTitle").length > 0 )  {
     }
 
     //해당 시간에 예약이 있는지 확인
-var Result = fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date);
+var Result = fnReserveChk(sRoomID, oStart_Date, oEnd_Date);
 
 var oBEGIN_DATE = "";
 var oEND_DATE = "";
@@ -49,7 +49,7 @@ if (oUSER_NM != "") {
 }
 
 //동일 시간대 같은 그룹의 회의실을 예약 하였는지 확인
-Result = fnReserveChk2(sRoom_ID, oStart_Date, oEnd_Date);
+Result = fnReserveChk2(sRoomID, oStart_Date, oEnd_Date);
 
 for (var i in Result) {                
     oROOM_NAME = Result[i].ROOM_NAME; 
@@ -136,7 +136,7 @@ function fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date){
       $.ajax({
           type: 'POST',
           url: 'Office_Data.aspx',
-          data: { RequestName: 'CHECKROOM', ROOMID: sRoom_ID, STARTDATE: oStart_Date, ENDDATE: oEnd_Date, RESERVEID: "0" },
+          data: { RequestName: 'CHECKROOM', ROOMID: sRoomID, STARTDATE: oStart_Date, ENDDATE: oEnd_Date, RESERVEID: "0" },
           dataType: 'json',
           async: false,
           success: function (resultData) {
@@ -157,7 +157,7 @@ function fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date){
       $.ajax({
           type: 'POST',
           url: 'Office_Data.aspx',
-          data: { RequestName: 'CHECKGROUP', ROOMID: sRoom_ID, STARTDATE: oStart_Date, ENDDATE: oEnd_Date, RESERVEID: "0" },
+          data: { RequestName: 'CHECKGROUP', ROOMID: sRoomID, STARTDATE: oStart_Date, ENDDATE: oEnd_Date, RESERVEID: "0" },
           dataType: 'json',
           async: false,
           success: function (resultData) {
@@ -174,20 +174,3 @@ function fnReserveChk(sRoom_ID, oStart_Date, oEnd_Date){
 
 fnRegResv = log;
 $(document.body).append('<div id="ry-message" style="position:fixed;top:10px;left:50%;width:90%;margin-left:-45%;padding:10px 0;background-color:rgba(0,0,0,0.5);color:white;font-size:15px;text-align:center;">1시간 단위 원클릭 예약 활성화 중</div>');
-
-
-====
-
-      
-
-    
-}        
-
-
-
-
-// sreserve ID 확인하기
-
-
-
-
