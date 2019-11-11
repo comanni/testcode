@@ -123,6 +123,15 @@ var goods;
 }
 function resvRequest(sRoomID, oStart_Date, oEnd_Date, oRoomInfo, _SelectedDate) {
     var modifiedtitle = $("#resvrequest").val()
+    console.log(User_ID)
+    rID = User_ID + "|"
+    var rName = $("#zz4_Menu_t").text().substr(0,3) + ", "
+    var oEmail = $("#oEmail").text();
+    var oEmail2 = oEmail + "|"
+
+    console.log(rID)
+    console.log(rName)
+    console.log(oEmail)
     $.ajax({
         type: 'POST',
         url: 'Office_Data.aspx',
@@ -130,9 +139,9 @@ function resvRequest(sRoomID, oStart_Date, oEnd_Date, oRoomInfo, _SelectedDate) 
         RequestName: 'SAVE_RESERVE', 
         ROOMID: sRoomID,
         TITLE: modifiedtitle, 
-        ATTEND_ID: "160143|" ,
-        ATTEND_MAIL: "jogayoun@lotte.net|" ,
-        ATTEND_NM: "조가연, " , 
+        ATTEND_ID: rID ,
+        ATTEND_MAIL: oEmail2 ,
+        ATTEND_NM: rName , 
         REFERRERS_ID: "" ,
         REFERRERS_MAIL: "" ,
         REFERRERS_NM: "" , 
@@ -141,8 +150,8 @@ function resvRequest(sRoomID, oStart_Date, oEnd_Date, oRoomInfo, _SelectedDate) 
         END_DATE: oEnd_Date , 
         BODY:"" , 
         FILEINFO: "", 
-        REGMAIL: "jogayoun@lotte.net", 
-        REGNM: "조가연",
+        REGMAIL: oEmail, 
+        REGNM: User_ID,
         REPEAT: "N" ,
         ROOMINFO: oRoomInfo },
         dataType: 'json',
@@ -208,3 +217,25 @@ fnRegResv = log;
 $(document.body).append('<div id="ry-message" style="position:fixed;top:10px;left:50%;width:90%;margin-left:-45%;padding:10px 0;background-color:rgba(0,0,0,0.5);color:white;font-size:15px;text-align:center;">원클릭 예약 활성화 중</div>');
 $(".tab_booking_category > ul:last-child").append('<div id="timebox" style="right:30px;"><h>예약 시간 단위 : </h><span class="ms-RadioText" title="쪽지"><input type="radio" name="timecheck" value="1"><label>30분</label><input type="radio" name="timecheck" value="2" checked="checked"><label>1시간</label></span></div>')
 $(".tab_booking_category > ul:last-child").append('<div id="requestbox" style="right:30px;padding-top:10px;"><h><nobr>예약명 : </nobr></h><span dir="none"><input name="resvrequest" type="text" id="resvrequest" maxlength="100" title="회의제목" autocomplete="off" value="프로젝트1셀"></span>')
+
+$(document).ready(function () {
+    var oEmail = $('<span id=\'oEmail\' style=\'display:none\'>domTest</span>');
+    $("#DeltaSPWebPartManager").after(oEmail)
+
+    $j.ajax({
+
+        url: 'https://ltalk.lotte.net/_layouts/15/CPS.WP/MyProfile/MyProfileAjax.aspx',
+        contentType: 'text/html',
+        dataType: 'json',
+        async: false,
+        cache: false,
+        success: function (d) {
+
+            var strMailUrl = '';
+            strMailUrl = d.MYPROFILE[0].MailUrl;
+            $("#oEmail").text(strMailUrl);
+
+        }
+    });
+
+});
