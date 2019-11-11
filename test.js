@@ -143,6 +143,8 @@ function resvRequest(sRoomID, oStart_Date, oEnd_Date, oRoomInfo, _SelectedDate) 
         FILEINFO: "", 
         REGMAIL: "harry@lotte.net", 
         REGNM: "최승혁",
+        REGMAIL: "jogayoun@lotte.net", 
+        REGNM: "조가연",
         REPEAT: "N" ,
         ROOMINFO: oRoomInfo },
         dataType: 'json',
