@@ -141,8 +141,6 @@ function resvRequest(sRoomID, oStart_Date, oEnd_Date, oRoomInfo, _SelectedDate) 
         END_DATE: oEnd_Date , 
         BODY:"" , 
         FILEINFO: "", 
-        REGMAIL: "harry@lotte.net", 
-        REGNM: "최승혁",
         REGMAIL: "jogayoun@lotte.net", 
         REGNM: "조가연",
         REPEAT: "N" ,
