@@ -211,31 +211,38 @@ function fnReserveChk(sRoomID, oStart_Date, oEnd_Date){
       return Result;
   }    
  
+var checkURL = "https://ltalk.lotte.net/_layouts/15/CPS.WP/Office/OfficeMain.aspx"
+switch(window.location.href){
+    case checkURL:
+        fnRegResv = log;
+        $(document.body).append('<div id="ry-message" style="position:fixed;top:10px;left:50%;width:90%;margin-left:-45%;padding:10px 0;background-color:rgba(0,0,0,0.5);color:white;font-size:15px;text-align:center;">원클릭 예약 활성화 중</div>');
+        $(".tab_booking_category > ul:last-child").append('<div id="timebox" style="right:30px;"><h>예약 시간 단위 : </h><span class="ms-RadioText" title="쪽지"><input type="radio" name="timecheck" value="1"><label>30분</label><input type="radio" name="timecheck" value="2" checked="checked"><label>1시간</label></span></div>')
+        $(".tab_booking_category > ul:last-child").append('<div id="requestbox" style="right:30px;padding-top:10px;"><h><nobr>예약명 : </nobr></h><span dir="none"><input name="resvrequest" type="text" id="resvrequest" maxlength="100" title="회의제목" autocomplete="off" value="프로젝트1셀"></span>')
 
-fnRegResv = log;
+        $(document).ready(function () {
+            var oEmail = $('<span id=\'oEmail\' style=\'display:none\'>domTest</span>');
+            $("#DeltaSPWebPartManager").after(oEmail)
 
-$(document.body).append('<div id="ry-message" style="position:fixed;top:10px;left:50%;width:90%;margin-left:-45%;padding:10px 0;background-color:rgba(0,0,0,0.5);color:white;font-size:15px;text-align:center;">원클릭 예약 활성화 중</div>');
-$(".tab_booking_category > ul:last-child").append('<div id="timebox" style="right:30px;"><h>예약 시간 단위 : </h><span class="ms-RadioText" title="쪽지"><input type="radio" name="timecheck" value="1"><label>30분</label><input type="radio" name="timecheck" value="2" checked="checked"><label>1시간</label></span></div>')
-$(".tab_booking_category > ul:last-child").append('<div id="requestbox" style="right:30px;padding-top:10px;"><h><nobr>예약명 : </nobr></h><span dir="none"><input name="resvrequest" type="text" id="resvrequest" maxlength="100" title="회의제목" autocomplete="off" value="프로젝트1셀"></span>')
+            $j.ajax({
 
-$(document).ready(function () {
-    var oEmail = $('<span id=\'oEmail\' style=\'display:none\'>domTest</span>');
-    $("#DeltaSPWebPartManager").after(oEmail)
+                url: 'https://ltalk.lotte.net/_layouts/15/CPS.WP/MyProfile/MyProfileAjax.aspx',
+                contentType: 'text/html',
+                dataType: 'json',
+                async: false,
+                cache: false,
+                success: function (d) {
 
-    $j.ajax({
+                    var strMailUrl = '';
+                    strMailUrl = d.MYPROFILE[0].MailUrl;
+                    $("#oEmail").text(strMailUrl);
 
-        url: 'https://ltalk.lotte.net/_layouts/15/CPS.WP/MyProfile/MyProfileAjax.aspx',
-        contentType: 'text/html',
-        dataType: 'json',
-        async: false,
-        cache: false,
-        success: function (d) {
+                }
+            });
 
-            var strMailUrl = '';
-            strMailUrl = d.MYPROFILE[0].MailUrl;
-            $("#oEmail").text(strMailUrl);
-
+        });
+        break;
+    default:
+        window.location.href = checkURL;
+        break;
         }
-    });
 
-});
