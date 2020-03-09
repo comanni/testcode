@@ -1,0 +1,40 @@
+<html>
+<head>
+<script type="text/javascript">
+var lhsip
+var erip
+window.onload = function() {
+  document.getElementById("submit").onclick = function() {
+		var lhsip = document.getElementById("lhsip").value
+        var erip = document.getElementById("erip").value
+        const a = document.createElement('a');
+        const bat_source = '@echo off\nmode con cols=60 lines=40\nCOLOR 0E\n\n:ST\necho.\necho  [Lotte Ip Changer]\necho    1: Inside IP\necho    2: Project Building(IP)\necho    3: outside(DHCP)\n\n\necho     q: finish\necho ----------------------------\n\n\nSET /P sel=select:\nIF %sel%==1 (goto lhs1)\nIF %sel%==2 (goto lhs2)\nIF %sel%==3 (goto lhs3)\n\nIF %sel%==q (goto quit)\n\n:lhs1\necho inside lotte homeshopping building.\necho IP: '+lhsip+'\necho subnet mask: 255.255.255.0\necho gateway: 10.144.191.254\nnetsh interface ipv4 set address "Wi-Fi" static '+lhsip+' 255.255.255.0 10.144.191.254\necho DNS1: 10.230.230.10\necho DNS2: 168.126.63.1\nnetsh interface ipv4 set dns "Wi-Fi" static 10.230.230.10 primary no\nnetsh interface ipv4 add dns "Wi-Fi" 168.126.63.1 index=2 no\npause\ngoto ST\n\n:lhs2\necho Project Building.\necho IP: '+erip+'\necho subnet mask: 255.255.255.0\necho gateway: 10.144.242.254\nnetsh interface ipv4 set address "Wi-Fi" static '+erip+' 255.255.255.0 10.144.242.69\necho DNS1: 10.230.230.10\necho DNS2: 168.126.63.1\nnetsh interface ipv4 set dns "Wi-Fi" static 10.230.230.10 primary no\nnetsh interface ipv4 add dns "Wi-Fi" 168.126.63.1 index=2 no\npause\ngoto ST\n\n:lhs3\necho DHCP Mode.\necho IP: auto\necho subnet mask: auto\necho gateway: auto\nnetsh interface ipv4 set address "Wi-Fi" source=dhcp\necho DNS: auto\nnetsh interface ipv4 set dnsservers "Wi-Fi" source=dhcp\npause\ngoto ST\n\n:quit\necho.'
+       a.href = 'data:text/plain;base64,' + btoa(unescape(encodeURIComponent(bat_source)));
+        a.download = 'lhs_ipchanger.bat'
+        a.click()
+	}
+}
+
+</script>
+</head>
+<body>
+<div>
+  <p>이레 빌딩 근무자를 위한 IP 스위처 제작기</p>
+</div>
+<div>
+<p>
+롯데 내부 IP(10.144.191.xxx)
+</p>
+<form><input id="lhsip" type="text" value="ip입력" /></form>
+</div>
+<div>
+<p>
+이레빌딩 IP(10.144.242.xxx)
+</p>
+<form><input id="erip" type="text" value="ip입력" /></form>
+</div>
+<div>
+<button id="submit">Submit</button>
+</div>
+</body>
+</html>
