@@ -72,6 +72,7 @@ const today = {
 
 function init() {
   //이메일 주소 ltalk에서 확인 ajax
+  checkLogin();
   myEmailRequest();
   // moment 호출
   moment().locale("ko");
