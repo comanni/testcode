@@ -13,6 +13,11 @@ function checkLogin() {
  }
 }
 
+function widthHeightChange(){
+  let x = document.getElementById("wrap").clientWidth;
+  let y = document.getElementById("wrap").clientHeight;
+  window.resizeTo(x+10, y+60)
+}
 if (typeof User_ID === 'undefined'){
   window.User_ID = null;
 }
@@ -84,6 +89,7 @@ function init() {
   defaultTimeInit();
   roomNameChk("", ltalk.defaultRoomTitle);
   startEndTimeUpdate();
+  widthHeightChange()
 }
 
 // test용 log요청
@@ -371,6 +377,7 @@ function list_mapping() {
         "]</label>"
     );
   });
+  widthHeightChange();
 }
 
 function roomNameChk(e, oThis) {
