@@ -2,7 +2,7 @@
 
 // test용 변수
 
-//  const User_ID = "harry"
+// const User_ID = "harry"
 // ltalk 로그인 여부 체크
 // if (getCookie('cps_ck2') == null) {
 //   window.location.href = "/_layouts/15/SignOut.aspx"
@@ -252,7 +252,7 @@ function roomListAjaxRequest() {
       CalCategory: floor_array.type,
       sOrderBy: "",
       sDir: "",
-      sUserID: ltalk.User_ID
+      sUserID: User_ID
     },
     dataType: 'json',
     async: true,
