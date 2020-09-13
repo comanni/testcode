@@ -346,7 +346,7 @@ function list_mapping() {
         '"><input type="radio" class="roomlistradio" name="roomlistradio" id="option' +
         i +
         '" ' +
-        (isDuplicated ? "disabled" : "") +
+        (isDuplicated ? "disabled " : "") +
         'data-roomid="' +
         e.ROOM_ID +
         '" />' +
@@ -466,7 +466,7 @@ function resvRequest() {
       RequestName: "SAVE_RESERVE",
       ROOMID: ltalk.sRoomID,
       TITLE: ltalk.room_title,
-      ATTEND_ID: talk.rID,
+      ATTEND_ID: ltalk.rID,
       ATTEND_MAIL: ltalk.oEmail2,
       ATTEND_NM: ltalk.rName,
       REFERRERS_ID: "",
@@ -516,7 +516,10 @@ function request_reserve() {
   // request_start_date = moment(request_start_date).format("YYYY-MM-DD HH:mm");
   // request_end_date = moment(request_end_date).format("YYYY-MM-DD HH:mm");
   let sRoomID = $("input:radio[name=roomlistradio]:checked").data("roomid");
-
+  if (sRoomID === undefined){
+    alert("예약할 방을 선택하세요")
+    return
+  }
   //해당 시간에 예약이 있는지 확인
   let Result = fnReserveChk(sRoomID, reqdate.start, reqdate.end);
 
