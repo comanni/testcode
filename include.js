@@ -14,7 +14,7 @@ function checkLogin() {
 }
 
 if (typeof User_ID === 'undefined'){
-  let User_ID = null;
+  window.User_ID = null;
 }
 // ltalk 변수 가져오기
 const ltalk = {
