@@ -13,7 +13,9 @@ function checkLogin() {
   }
 }
 
-
+if (typeof User_ID === 'undefined'){
+  let User_ID = null;
+}
 // ltalk 변수 가져오기
 const ltalk = {
   rID: User_ID + "|",
@@ -529,6 +531,9 @@ function request_reserve() {
   // request_end_date = moment(request_end_date).format("YYYY-MM-DD HH:mm");
   let sRoomID = $("input:radio[name=roomlistradio]:checked").data("roomid");
   ltalk.sRoomID = sRoomID;
+  if (User_ID === null) {
+    alert("로그인 여부를 확인하세요")
+  }
   if (sRoomID === undefined) {
     alert("예약할 방을 선택하세요");
     return;
