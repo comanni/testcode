@@ -2,9 +2,17 @@
 
 // const User_ID = "harry"
 // ltalk 로그인 여부 체크
-// if (getCookie('cps_ck2') == null) {
-//   window.location.href = "/_layouts/15/SignOut.aspx"
-// }
+
+function checkLogin() {
+  if (!document.cookie.split('; ').find(row => row.startsWith('cps_ck2'))) {
+    window.location.href = "/_layouts/15/CPS.Common/_Forms/default.aspx?ReturnUrl=%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252F&Source=%2F&roomresv=true"
+
+  }
+  else if(!document.cookie.split('; ').find(row => row.startsWith('FedAuth'))){
+    window.location.href = "/_layouts/15/CPS.Common/_Forms/default.aspx?ReturnUrl=%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252F&Source=%2F&roomresv=true"
+  }
+}
+
 
 // ltalk 변수 가져오기
 const ltalk = {
@@ -15,7 +23,7 @@ const ltalk = {
   room_title: "",
   oRoomInfo: null,
   sRoomID: null,
-  defaultRoomTitle: "프로젝트1셀"
+  defaultRoomTitle: "프로젝트1셀",
 };
 // let rID = User_ID + "|";
 // let rName = $("#zz4_Menu_t").text().substr(0, 3) + ", ";
@@ -495,6 +503,7 @@ function resvRequest() {
   });
   if (Result == "OK") {
     alert("예약이 저장 되었습니다.");
+    roomListAjaxRequest();
   }
 }
 
@@ -519,9 +528,9 @@ function request_reserve() {
   // request_end_date = moment(request_end_date).format("YYYY-MM-DD HH:mm");
   let sRoomID = $("input:radio[name=roomlistradio]:checked").data("roomid");
   ltalk.sRoomID = sRoomID;
-  if (sRoomID === undefined){
-    alert("예약할 방을 선택하세요")
-    return
+  if (sRoomID === undefined) {
+    alert("예약할 방을 선택하세요");
+    return;
   }
   //해당 시간에 예약이 있는지 확인
   let Result = fnReserveChk(sRoomID, reqdate.start, reqdate.end);
@@ -560,7 +569,7 @@ function request_reserve() {
     return;
   }
 
-// 예약할 방 이름 탐색
+  // 예약할 방 이름 탐색
   $.ajax({
     type: "POST",
     url: "Office_Data.aspx",
