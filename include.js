@@ -286,6 +286,9 @@ function roomListFind(isAjax) {
   if (reqdate.full !== null && floor_array.type !== null) {
     isAjax === true ? roomListAjaxRequest() : list_mapping();
   }
+  else{
+    widthHeightChange()
+  }
 }
 
 function roomListAjaxRequest() {
