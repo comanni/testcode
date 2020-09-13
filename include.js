@@ -8,7 +8,9 @@ function checkLogin() {
     window.location.href = "/_layouts/15/CPS.Common/_Forms/default.aspx?ReturnUrl=%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252F&Source=%2F&roomresv=true"
 
   }
-
+ else if(document.getElementById("ms-error-header") !== null){
+  window.location.href = "/_layouts/15/CPS.Common/_Forms/default.aspx?ReturnUrl=%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252F&Source=%2F&roomresv=true"
+ }
 }
 
 if (typeof User_ID === 'undefined'){
