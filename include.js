@@ -15,6 +15,7 @@ const ltalk = {
   room_title: "",
   oRoomInfo: null,
   sRoomID: null,
+  defaultRoomTitle: "프로젝트1셀"
 };
 // let rID = User_ID + "|";
 // let rName = $("#zz4_Menu_t").text().substr(0, 3) + ", ";
@@ -361,10 +362,10 @@ function list_mapping() {
 }
 
 function roomNameChk(e, oThis) {
-  console.log(e.value);
+  console.log(oThis);
   // 데이터가 없는 경우 회의명 리셋
-  if (e.value === undefined) {
-    $("#room_name").val("프로젝트1셀");
+  if (oThis.value === undefined) {
+    $("#room_name").val(ltalk.defaultRoomTitle);
   }
   ltalk.room_title = $("#room_name").val();
 }
@@ -516,6 +517,7 @@ function request_reserve() {
   // request_start_date = moment(request_start_date).format("YYYY-MM-DD HH:mm");
   // request_end_date = moment(request_end_date).format("YYYY-MM-DD HH:mm");
   let sRoomID = $("input:radio[name=roomlistradio]:checked").data("roomid");
+  ltalk.sRoomID = sRoomID;
   if (sRoomID === undefined){
     alert("예약할 방을 선택하세요")
     return
@@ -588,8 +590,8 @@ function myEmailRequest() {
     async: false,
     cache: false,
     success: function (d) {
-      oEmail = d.MYPROFILE[0].MailUrl;
-      oEmail2 = oEmail + "|";
+      ltalk.oEmail = d.MYPROFILE[0].MailUrl;
+      ltalk.oEmail2 = oEmail + "|";
     },
   });
 }
