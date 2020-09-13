@@ -71,6 +71,7 @@ function init() {
   $("#_userDate").val(today.short);
   // 시간 설정
   defaultTimeInit();
+  roomNameChk(e, ltalk.defaultRoomTitle);
   startEndTimeUpdate();
 }
 
@@ -591,7 +592,7 @@ function myEmailRequest() {
     cache: false,
     success: function (d) {
       ltalk.oEmail = d.MYPROFILE[0].MailUrl;
-      ltalk.oEmail2 = oEmail + "|";
+      ltalk.oEmail2 = ltalk.oEmail + "|";
     },
   });
 }
