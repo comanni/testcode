@@ -71,7 +71,7 @@ function init() {
   $("#_userDate").val(today.short);
   // 시간 설정
   defaultTimeInit();
-  roomNameChk(e, ltalk.defaultRoomTitle);
+  roomNameChk("", ltalk.defaultRoomTitle);
   startEndTimeUpdate();
 }
 
