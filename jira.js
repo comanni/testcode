@@ -12,6 +12,7 @@ function makeBody(EVENT){
         message += td[2].innerText
 
 let tempElem = document.createElement('textarea');
+tempElem.setAttribute("id", "textarea");
 tempElem.value = message;
 
 let str = document.getElementById("textarea").value;
