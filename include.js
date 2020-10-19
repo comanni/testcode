@@ -597,14 +597,12 @@ function startEndTimeUpdate() {
     reqdate.endTime = moment(reqdate.end, "YYYY-MM-DD HH:mm").format("HH:mm");
 }
 
+
 function searchPeople(name) {
-    if ($("#inputUser").val().length < 2) {
+    if (name.length < 2) {
         alert("두 글자 이상 입력해 주시기 바랍니다."); //두 글자 이상 입력해 주시기 바랍니다.
     } else {
-        var data = $("#OrgTree").GetCurrent();
-        if ($("#optionUser1").val() == "D" && data == undefined) {
-            alert("부서를 선택해 주시기 바랍니다."); //부서를 선택해 주시기 바랍니다.
-        } else {
+
             $.ajax({
                 type: "GET",
                 url: "OrgAjax.aspx",
@@ -638,8 +636,7 @@ function searchPeople(name) {
                             )
                           }
                         }
-                    }
-                },
+                    },
                 error: function (error) {
                     alert(error.status + " : " + error.statusText);
                 },
@@ -647,7 +644,6 @@ function searchPeople(name) {
         }
     }
 }
-
 function calendarAdd () {
 $.ajax({
     url:
