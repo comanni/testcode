@@ -205,7 +205,7 @@ function time_calibration(e) {
 function alertCheck(a) {
     let chkMsg = 0;
     let chkMail = 0;
-    if (document.getElementById("chkMsg").checked) {
+    if (document.getElementById("chkMsg2").checked) {
         console.log("msg true");
         chkMsg = 1;
     }
