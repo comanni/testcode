@@ -602,48 +602,48 @@ function searchPeople(name) {
     if (name.length < 2) {
         alert("두 글자 이상 입력해 주시기 바랍니다."); //두 글자 이상 입력해 주시기 바랍니다.
     } else {
-
-            $.ajax({
-                type: "GET",
-                url: "OrgAjax.aspx",
-                data:
-                    "method=" +
-                    "SearchUserInfo" +
-                    "&emplNo=" +
-                    User_ID +
-                    "&firstGubun=G" +
-                    "&deptNo=ORG2202" +
-                    "&secGubun=1" +
-                    "&keyword=" +
-                    encodeURI(name) +
-                    "&pageNum=1" +
-                    "&pageCnt=" +
-                    "30",
-                dataType: "json",
-                async: true,
-                cache: false,
-                success: function (data) {
-                    if (data && !data.error) {
-                        if (data[0] != undefined) {
-                          for (let i=0; i < data.length; i++){
-                            $("#findPeopleList").append(
-                              `<tr>
-                              <td>${i+1}</td>
-                              <td>${data.EMPL_NM}</td>
-                              <td>${data.LEVEL_NM}/${TITLE_NM}</td>
-                              <td>${DPRT_NM}</td>
-                              </tr>`
-                            )
-                          }
+        $.ajax({
+            type: "GET",
+            url: "OrgAjax.aspx",
+            data:
+                "method=" +
+                "SearchUserInfo" +
+                "&emplNo=" +
+                User_ID +
+                "&firstGubun=G" +
+                "&deptNo=ORG2202" +
+                "&secGubun=1" +
+                "&keyword=" +
+                encodeURI(name) +
+                "&pageNum=1" +
+                "&pageCnt=" +
+                "30",
+            dataType: "json",
+            async: true,
+            cache: false,
+            success: function (data) {
+                if (data && !data.error) {
+                    if (data[0] != undefined) {
+                        for (let i=0; i < data.length; i++){
+                        $("#findPeopleList").append(
+                            `<tr>
+                            <td>${i+1}</td>
+                            <td>${data.EMPL_NM}</td>
+                            <td>${data.LEVEL_NM}/${TITLE_NM}</td>
+                            <td>${DPRT_NM}</td>
+                            <td><button class="btn btn-outline-secondary btn-sm" type="button" data-peopleArrayNumber=${i}>추가하기</button></td>
+                            </tr>`
+                        );
                         }
-                    },
+                    }
+                }
+            },
                 error: function (error) {
                     alert(error.status + " : " + error.statusText);
                 },
             });
         }
     }
-}
 function calendarAdd () {
 $.ajax({
     url:
