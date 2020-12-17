@@ -44,7 +44,7 @@ function makeButton(){
         let buttonSpan = document.createElement("button");
 
         // 버튼 내용 설정
-        buttonSpan.innerText = "xls파일로 변환";
+        buttonSpan.innerText = buttonName[i];
         buttonSpan.setAttribute("background-color", "rgb(0,115,240)");
         buttonSpan.setAttribute("class", 'btnExport aui-button xls-table'+(i + 1));
         buttonSpan.setAttribute("data-tableNumber", (i+1))
