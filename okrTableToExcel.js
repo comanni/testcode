@@ -7,7 +7,7 @@ init();
 function init(){
     makeButton();
 }
-let btn =$(".btnExport");
+let btn =$(".btnOkrExport");
 let tbl = "table";
 btn.on("click", function (e) {
     let buttonName = ["주간WBS", "주간리뷰", "Action Plan"];
@@ -46,7 +46,7 @@ function makeButton(){
         // 버튼 내용 설정
         buttonSpan.innerText = buttonName[i];
         buttonSpan.setAttribute("background-color", "rgb(0,115,240)");
-        buttonSpan.setAttribute("class", 'btnExport aui-button xls-table'+(i + 1));
+        buttonSpan.setAttribute("class", 'btnOkrExport aui-button xls-table'+(i + 1));
         buttonSpan.setAttribute("data-tableNumber", (i+1))
 
         // 버튼 추가
