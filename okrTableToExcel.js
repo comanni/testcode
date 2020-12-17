@@ -11,7 +11,6 @@ let btn =$(".btnOkrExport");
 let tbl = "table";
 btn.on("click", function (e) {
     let buttonName = ["주간WBS", "주간리뷰", "Action Plan"];
-    let number = e.target.dataset.tablenumber;
     let dt = new Date();
     let year = itoStr(dt.getFullYear());
     let month = itoStr(dt.getMonth() + 1);
@@ -20,7 +19,7 @@ btn.on("click", function (e) {
     let mins = itoStr(dt.getMinutes());
     let postfix = year + month + day + "_" + hour + mins;
     let title = document.getElementById("title-text").innerText.trim();
-    let fileName = title + "_" + buttonName[number - 1] + ".xlsx";
+    let fileName = title + "_취합" + ".xlsx";
 
     // 테이블에 데이터 넣기 요청
     // tableDataOverwrite("table"+number);
@@ -43,22 +42,23 @@ function makeButton(){
     let tablelist = document.getElementsByTagName("table");
     const downloadButtonWrap = document.getElementById("downloadButtonWrap");
     let buttonName = ["주간WBS", "주간리뷰", "Action Plan"];
+    
+    let button = document.createElement("div");
+    let buttonSpan = document.createElement("button");
+
+    // 버튼 내용 설정
+    buttonSpan.innerText = "OKR 데이터 다운로드";
+    buttonSpan.setAttribute("background-color", "rgb(0,115,240)");
+    buttonSpan.setAttribute("class", 'btnOkrExport aui-button xls-table'+(i + 1));
+
+    // 버튼 추가
+    button.appendChild(buttonSpan);
+    downloadButtonWrap.appendChild(button)
+    
+    
     for (let i = 0; i < tablelist.length; i++){
         tablelist[i].id = 'table' + (i + 1);
-        // 버튼 생성
-        let button = document.createElement("div");
-        let buttonSpan = document.createElement("button");
 
-        // 버튼 내용 설정
-        buttonSpan.innerText = buttonName[i];
-        buttonSpan.setAttribute("background-color", "rgb(0,115,240)");
-        buttonSpan.setAttribute("class", 'btnOkrExport aui-button xls-table'+(i + 1));
-        buttonSpan.setAttribute("data-tableNumber", (i+1))
-
-        // 버튼 추가
-        button.appendChild(buttonSpan);
-        downloadButtonWrap.appendChild(button)
-        // tablelist[i].parentNode.insertBefore(button, tablelist[i]);
         };
 };
 // 셀 색상 데이터에 추가하기
