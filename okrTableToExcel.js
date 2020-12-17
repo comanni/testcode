@@ -23,15 +23,21 @@ btn.on("click", function (e) {
     let fileName = title + "_" + buttonName[number - 1] + ".xlsx";
 
     // 테이블에 데이터 넣기 요청
-    tableDataOverwrite("table"+number);
+    // tableDataOverwrite("table"+number);
+    tableDataOverwrite("table1")
+    tableDataOverwrite("table2")
+    tableDataOverwrite("table3")
 
-    TableToExcel.convert(document.getElementById("table"+number), {
-    name : fileName,
-    sheet: {
-    name: "Sheet 1"
-        }
-      });
-});
+    table1 = document.getElementById("table1");
+    table2 = document.getElementById("table2");
+    table3 = document.getElementById("table3");
+
+    book = TableToExcel.tableToBook(table1, {sheet:{name:"주간WBS"}});
+    TableToExcel.tableToSheet(book, table2, {sheet:{name:"주간리뷰"}});
+    TableToExcel.tableToSheet(book, table3, {sheet:{name:"action plan"}});
+    
+    TableToExcel.save(book, fileName)
+    
 
 function makeButton(){
     let tablelist = document.getElementsByTagName("table");
