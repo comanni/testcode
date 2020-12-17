@@ -11,7 +11,7 @@ let btn =$(".btnExport");
 let tbl = "table";
 btn.on("click", function (e) {
     let buttonName = ["주간WBS", "주간리뷰", "Action Plan"];
-    let number = e.target.dataset.tablenumber - 1;
+    let number = e.target.dataset.tablenumber;
     let dt = new Date();
     let year = itoStr(dt.getFullYear());
     let month = itoStr(dt.getMonth() + 1);
@@ -20,7 +20,7 @@ btn.on("click", function (e) {
     let mins = itoStr(dt.getMinutes());
     let postfix = year + month + day + "_" + hour + mins;
     let title = document.getElementById("title-text").innerText.trim();
-    let fileName = title + "_" + buttonName[number] + ".xlsx";
+    let fileName = title + "_" + buttonName[number - 1] + ".xlsx";
 
     // 테이블에 데이터 넣기 요청
     tableDataOverwrite("table"+number);
