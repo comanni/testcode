@@ -49,7 +49,7 @@ function makeButton(){
     // 버튼 내용 설정
     buttonSpan.innerText = "OKR 데이터 다운로드";
     buttonSpan.setAttribute("background-color", "rgb(0,115,240)");
-    buttonSpan.setAttribute("class", 'btnOkrExport aui-button xls-table'+(i + 1));
+    buttonSpan.setAttribute("class", 'btnOkrExport aui-button);
 
     // 버튼 추가
     button.appendChild(buttonSpan);
