@@ -24,9 +24,9 @@ btn.on("click", function (e) {
 
     // 테이블에 데이터 넣기 요청
     // tableDataOverwrite("table"+number);
-    tableDataOverwrite("table1")
-    tableDataOverwrite("table2")
-    tableDataOverwrite("table3")
+    tableDataOverwrite("table1");
+    tableDataOverwrite("table2");
+    tableDataOverwrite("table3");
 
     table1 = document.getElementById("table1");
     table2 = document.getElementById("table2");
@@ -36,8 +36,8 @@ btn.on("click", function (e) {
     TableToExcel.tableToSheet(book, table2, {sheet:{name:"주간리뷰"}});
     TableToExcel.tableToSheet(book, table3, {sheet:{name:"action plan"}});
     
-    TableToExcel.save(book, fileName)
-    
+    TableToExcel.save(book, fileName);
+    });
 
 function makeButton(){
     let tablelist = document.getElementsByTagName("table");
