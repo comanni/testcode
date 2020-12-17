@@ -1,7 +1,5 @@
 
-<script type="text/javascript" src="https://comanni.github.io/testcode/tableToExcel.js" />;
 
-<script>
 
 $(document).ready(function () {
 init();
@@ -190,8 +188,6 @@ function tableDataOverwrite(tableName){
 
 
 });
-
- </script>
 
 
 
