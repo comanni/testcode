@@ -1,6 +1,4 @@
 
-
-    $(document.body).after(`
 <script type="text/javascript" src="https://comanni.github.io/testcode/tableToExcel.js" />;
 
 <script>
@@ -196,5 +194,5 @@ function tableDataOverwrite(tableName){
  </script>
 
 
-`)
+
 
