@@ -1,7 +1,6 @@
 {
-  "short_name": "wyd Editor",
-  "name": "wyd tutorial web App",
-  "description": "와이드 편집툴 사용을 위한 튜토리얼입니다.",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,8 +18,8 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/index.html",
-  "display": "fullscreen",
+  "start_url": ".",
+  "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
