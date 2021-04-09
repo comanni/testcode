@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <title>Online 3D Viewer</title>
+
+    <script type="text/javascript" src="three.min-126.js"></script>
+    <script type="text/javascript" src="o3dv.min-0.7.6.js"></script>
+    <style>
+        html, body
+        {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap" style="width:100%; height:100%"></div>
+    <!-- <div class="online_3d_viewer" id="threeD"
+        style="width: 800px; height: 600px;"
+        camera="3,1,2,0,0,0,0,0,1">
+    </div> -->
+    <script type='text/javascript'>
+        function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+        let obj = getParameterByName("obj")
+        let mtl = getParameterByName("mtl")
+        let texture = getParameterByName("texture")
+
+        let threeD = document.createElement("div")
+        threeD.setAttribute("class", "online_3d_viewer")
+        threeD.setAttribute("style","width:100%; height:100%")
+        threeD.setAttribute("camera", "3,1,2,0,0,0,0,0,1")
+        threeD.setAttribute("model",`${obj}.obj,${mtl}.mtl,${texture}`)
+
+
+        let wrap = document.getElementById("wrap")
+        wrap.append(threeD)
+       
+        OV.Init3DViewerElements ();
+    </script>
+</body>
+
+</html>
