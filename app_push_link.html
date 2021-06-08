@@ -1,0 +1,129 @@
+<script>
+    function makeUrl() {
+        //default url
+        const URL = {
+            APPPUSH : "https://OnzpHzOCLkKZB9F1KXyd7w.adtouch.adbrix.io/api/v1/click/ppZ5PwP8SEWQin4j2n5V8A?deeplink_custom_path=",
+            SMS : "https://OnzpHzOCLkKZB9F1KXyd7w.adtouch.adbrix.io/api/v1/click/O80020qgaEiWt9Hpy5slDA?deeplink_custom_path="
+        }
+        const pageType = {
+            PLANSHOP : "ndp-wyd://wyd?pageId=spdp&spdpId=",
+            EVENT :"ndp-wyd://wyd?pageId=event&eventId=",
+            PRODUCT : "ndp-wyd://wyd?pageId=goods&goodsId=",
+            CONTENT : "ndp-wyd://wyd?pageId=conts&contId=",
+            LIVE : "ndp-wyd://wyd?pageId=live&liveId=",
+            MAIN : "ndp-wyd://wyd"
+        }
+
+        const selectSendType = document.getElementById("sendType")
+        const selectPageType = document.getElementById("pageType")
+
+        const resultURL = URL[selectSendType.options[selectSendType.selectedIndex].value]
+        const resultPAGE_URL = pageType[selectPageType.options[selectPageType.selectedIndex].value]
+        const resultPAGE_NAME = selectPageType.options[selectPageType.selectedIndex].value
+
+        const eventID = encodeURIComponent(document.getElementById("eventID").value)       
+        const adGroup = encodeURIComponent(document.getElementById("adGroup").value)
+
+        if (!resultURL || !resultPAGE_URL){
+            alert("발송타입 혹은 페이지 종류가 선택되지 않았습니다.")
+            return
+        }
+        const OutputURL = resultURL + encodeURIComponent(resultPAGE_URL) + eventID + "&adv_adgroup=" + resultPAGE_NAME + "&adv_keyword=" + adGroup
+        document.getElementById("url_result").value = OutputURL
+
+        // QR코드 만들기
+        encodeOutputUrl = encodeURIComponent(OutputURL)
+        document.querySelector("#qrcode").src = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl="+encodeOutputUrl
+        console.log("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl="+encodeOutputUrl)
+    }
+    function clipboardCopy(){
+        let textarea = document.querySelector("#url_result")
+        textarea.select()
+        document.execCommand("copy");  //복사
+        textarea.setSelectionRange(0, 0)
+        alert("복사되었습니다.")
+    }
+</script>
+
+<body>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+
+
+
+</body>
+
+<div class="container-fluid" style="max-width: 1400px;  margin-top:10px">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row" style="border-radius: 8px; box-shadow: 5px 5px 10px #eeeeee;">
+                <div class="col-md-2 align-middle" style="text-align:center;display:flex;justify-content: flex-end;border-right:1px solid #ddd;background: #eeeeee; border-radius: 8px 0 0 8px;"><p class="h5" style="padding-top:25px;" >입력</p></div>
+                <div class="col-md-10">
+                    <div class="row" >
+                        <div class="col-md-10" >
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3 mt-3">
+                                    <select name="sendType" id="sendType" class="form-select form-select-lg">
+                                        <option value="none" disabled selected hidden>발송 타입 선택</option>
+                                        <option value="APPPUSH">앱푸시</option>
+                                        <option value="SMS">SMS/LMS</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mt-3">
+                                    <select name="pageType" id="pageType" class="form-select form-select-lg">
+                                        <option value="none" disabled selected hidden>페이지 종류 선택</option>
+                                        <option value="PLANSHOP">기획전</option>
+                                        <option value="EVENT">이벤트</option>
+                                        <option value="PRODUCT">상품</option>
+                                        <option value="CONTENT">콘텐츠</option>
+                                        <option value="LIVE">라이브</option>
+                                        <option value="MAIN">메인</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" placeholder="이동할 대상의 번호를 입력하세요." id="eventID" class="form-control"></input>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" placeholder="발송 목적을 입력하세요." id="adGroup" class="form-control"></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-grid gap-2 mb-3 mt-3">
+                            <button type="button" onclick="makeUrl()" class="btn btn-primary btn-lg align-middle">URL</br>생성</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mt-4" style="border-radius: 8px; box-shadow: 5px 5px 10px #eeeeee;">
+                <div class="col-md-2 align-middle" style="text-align:center;display:flex;justify-content: flex-end;border-right:1px solid #ddd;background:#eeeeee;border-radius: 8px 0 0 8px;"><p class="h5" style="padding-top:25px">결과</p></div>
+                <div class="col-md-10">
+                    <div class="row" >
+                        <div class="col-md-10 pt-3 pb-3" >
+                            <div class="input-group input-group-lg">
+                                <input type="text" placeholder="결과물" id="url_result" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-grid gap-2 mt-3 mb-3">
+                            <button type="button" class="btn btn-primary btn-lg" onclick="clipboardCopy()">복사</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2" style="border-radius: 8px; box-shadow: 5px 5px 10px #eeeeee;"><p class="h4" style="padding-top:10px">QR 코드</p><img src="" id="qrcode" /></div>
+    </div>
+</div>
