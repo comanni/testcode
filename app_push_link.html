@@ -1,49 +1,4 @@
-<script>
-    function makeUrl() {
-        //default url
-        const URL = {
-            APPPUSH : "https://OnzpHzOCLkKZB9F1KXyd7w.adtouch.adbrix.io/api/v1/click/ppZ5PwP8SEWQin4j2n5V8A?deeplink_custom_path=",
-            SMS : "https://OnzpHzOCLkKZB9F1KXyd7w.adtouch.adbrix.io/api/v1/click/O80020qgaEiWt9Hpy5slDA?deeplink_custom_path="
-        }
-        const pageType = {
-            PLANSHOP : "ndp-wyd://wyd?pageId=spdp&spdpId=",
-            EVENT :"ndp-wyd://wyd?pageId=event&eventId=",
-            PRODUCT : "ndp-wyd://wyd?pageId=goods&goodsId=",
-            CONTENT : "ndp-wyd://wyd?pageId=conts&contId=",
-            LIVE : "ndp-wyd://wyd?pageId=live&liveId=",
-            MAIN : "ndp-wyd://wyd"
-        }
 
-        const selectSendType = document.getElementById("sendType")
-        const selectPageType = document.getElementById("pageType")
-
-        const resultURL = URL[selectSendType.options[selectSendType.selectedIndex].value]
-        const resultPAGE_URL = pageType[selectPageType.options[selectPageType.selectedIndex].value]
-        const resultPAGE_NAME = selectPageType.options[selectPageType.selectedIndex].value
-
-        const eventID = encodeURIComponent(document.getElementById("eventID").value)       
-        const adGroup = encodeURIComponent(document.getElementById("adGroup").value)
-
-        if (!resultURL || !resultPAGE_URL){
-            alert("발송타입 혹은 페이지 종류가 선택되지 않았습니다.")
-            return
-        }
-        const OutputURL = resultURL + encodeURIComponent(resultPAGE_URL) + eventID + "&adv_adgroup=" + resultPAGE_NAME + "&adv_keyword=" + adGroup
-        document.getElementById("url_result").value = OutputURL
-
-        // QR코드 만들기
-        encodeOutputUrl = encodeURIComponent(OutputURL)
-        document.querySelector("#qrcode").src = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl="+encodeOutputUrl
-        console.log("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl="+encodeOutputUrl)
-    }
-    function clipboardCopy(){
-        let textarea = document.querySelector("#url_result")
-        textarea.select()
-        document.execCommand("copy");  //복사
-        textarea.setSelectionRange(0, 0)
-        alert("복사되었습니다.")
-    }
-</script>
 
 <body>
 
@@ -127,3 +82,113 @@
         <div class="col-md-2" style="border-radius: 8px; box-shadow: 5px 5px 10px #eeeeee;"><p class="h4" style="padding-top:10px">QR 코드</p><img src="" id="qrcode" /></div>
     </div>
 </div>
+
+<script>
+    function makeUrl() {
+        //default url
+        const URL = {
+            APPPUSH : "https://OnzpHzOCLkKZB9F1KXyd7w.adtouch.adbrix.io/api/v1/click/ppZ5PwP8SEWQin4j2n5V8A?deeplink_custom_path=",
+            SMS : "https://OnzpHzOCLkKZB9F1KXyd7w.adtouch.adbrix.io/api/v1/click/O80020qgaEiWt9Hpy5slDA?deeplink_custom_path="
+        }
+        const pageType = {
+            PLANSHOP : "ndp-wyd://wyd?pageId=spdp&spdpId=",
+            EVENT :"ndp-wyd://wyd?pageId=event&eventId=",
+            PRODUCT : "ndp-wyd://wyd?pageId=goods&goodsId=",
+            CONTENT : "ndp-wyd://wyd?pageId=conts&contId=",
+            LIVE : "ndp-wyd://wyd?pageId=live&liveId=",
+            MAIN : "ndp-wyd://wyd"
+        }
+
+        const selectSendType = document.getElementById("sendType")
+        const selectPageType = document.getElementById("pageType")
+
+        const resultURL = URL[selectSendType.options[selectSendType.selectedIndex].value]
+        const resultPAGE_URL = pageType[selectPageType.options[selectPageType.selectedIndex].value]
+        const resultPAGE_NAME = selectPageType.options[selectPageType.selectedIndex].value
+
+        const eventID = encodeURIComponent(document.getElementById("eventID").value)       
+        const adGroup = encodeURIComponent(document.getElementById("adGroup").value)
+
+        // 드롭다운 선택했는지 체크
+        if (!resultURL || !resultPAGE_URL){
+            alert("발송타입 혹은 페이지 종류가 선택되지 않았습니다.")
+            return
+        }
+        else if (adGroup === "") {
+            alert("발송 목적을 작성해주세요.")
+            return
+        }
+        // eventID 최대한 검사
+        else if (pageTypeCheck(resultPAGE_NAME, eventID)){
+
+            let OutputURL = resultURL + encodeURIComponent(resultPAGE_URL) + eventID + "&adv_adgroup=" + resultPAGE_NAME + "&adv_keyword=" + adGroup
+            
+            // 메이넾이지로 랜딩 시 파라메터 수정
+            if (resultPAGE_NAME === "MAIN"){
+                OutputURL = resultURL + encodeURIComponent(resultPAGE_URL) + "?adv_adgroup=" + resultPAGE_NAME + "&adv_keyword=" + adGroup
+            }
+            
+            // 결과 input에 주소 복사
+            document.getElementById("url_result").value = OutputURL
+
+            // QR코드 만들기
+            encodeOutputUrl = encodeURIComponent(OutputURL)
+            document.querySelector("#qrcode").src = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl="+encodeOutputUrl
+
+        }
+    }
+    function clipboardCopy(){
+        let textarea = document.querySelector("#url_result")
+        textarea.select()
+        document.execCommand("copy");  //복사
+        textarea.setSelectionRange(0, 0)
+        alert("복사되었습니다.")
+    }
+    function pageTypeCheck(pageName, eventID){
+        let numberCheck =/\d/;
+        switch (pageName) {
+            case "PLANSHOP":
+                if (eventID.indexOf("VSA") === -1 || eventID.length !== 8) {
+                    alert("정상적인 기획전 포맷이 아닙니다.")
+                    return
+                } 
+                break;
+            case "EVENT":
+                if (!numberCheck.test(eventID) || eventID.length>5 || eventID.length<3){
+                    alert("정상적인 이벤트 번호가 아닙니다.")
+                    return
+                }
+                break
+            case "product":
+                if (eventID.length !== 18 || eventID.indexOf("GD100000") === -1){
+                    alert("정상적인 상품 번호가 아닙니다. wyd 상품코드를 입력하세요.")
+                    return
+                }
+                break
+            case "content":
+                if (eventID.length !== 24){
+                    alert("정상적인 콘텐츠 번호가 아닙니다.")
+                    return
+                }
+                break
+
+            default:
+                break;
+        }
+        return true
+    }
+    function placeHolderChange(e){
+        const placeHolderList = {
+            PLANSHOP:"기획전ID를 입력하세요.",
+            EVENT:"이벤트ID를 입력하세요.",
+            PRODUCT:"상품코드(GD...)를 입력하세요.",
+            CONTENT:"콘텐츠 ID를 입력하세요.",
+            LIVE:"라이브ID를 입력하세요",
+            MAIN:"이칸에 아무것도 입력하지마세요."
+        }
+        let selectedPageName = e.target.options[e.target.selectedIndex].value
+        let inputArea = document.getElementById("eventID")
+        inputArea.placeholder = placeHolderList[selectedPageName]
+    }
+    document.getElementById("pageType").addEventListener("change", placeHolderChange)
+</script>
