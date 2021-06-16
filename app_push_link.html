@@ -148,8 +148,8 @@
         let numberCheck =/\d/;
         switch (pageName) {
             case "PLANSHOP":
-                if (eventID.indexOf("VSA") === -1 || eventID.length !== 8) {
-                    alert("정상적인 기획전 포맷이 아닙니다.")
+                if (eventID.indexOf("VSA") === -1 && eventID.indexOf("VSB") === -1 || eventID.length !== 8) {
+                    alert("정상적인 기획전 포맷이 아닙니다. 대문자가 맞는지 확인해주세요.")
                     return
                 } 
                 break;
