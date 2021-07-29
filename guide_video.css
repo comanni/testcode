@@ -1,0 +1,445 @@
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src: local("Noto Sans KR"), url(./fonts/NotoSans-Regular.woff2) format("woff2")
+  }
+  
+  @font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 500;
+    src: local("Noto Sans KR"), url(./fonts/NotoSans-Medium.woff2) format("woff2")
+  }
+  @font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    src: local("Noto Sans KR"), url(./fonts/NotoSans-Bold.woff2) format("woff2")
+  }
+  
+@media screen and (min-width: 750px) {
+
+    html {
+        font-size: 28px
+    }
+
+}
+
+@media screen and (max-width: 749px) {
+    html {
+        font-size:27.6316px
+    }
+}
+
+@media screen and (max-width: 739px) {
+    html {
+        font-size:27.2632px
+    }
+}
+
+@media screen and (max-width: 729px) {
+    html {
+        font-size:26.8948px
+    }
+}
+
+@media screen and (max-width: 719px) {
+    html {
+        font-size:26.5264px
+    }
+}
+
+@media screen and (max-width: 709px) {
+    html {
+        font-size:26.158px
+    }
+}
+
+@media screen and (max-width: 699px) {
+    html {
+        font-size:25.7896px
+    }
+}
+
+@media screen and (max-width: 689px) {
+    html {
+        font-size:25.4212px
+    }
+}
+
+@media screen and (max-width: 679px) {
+    html {
+        font-size:25.0528px
+    }
+}
+
+@media screen and (max-width: 669px) {
+    html {
+        font-size:24.6844px
+    }
+}
+
+@media screen and (max-width: 659px) {
+    html {
+        font-size:24.316px
+    }
+}
+
+@media screen and (max-width: 649px) {
+    html {
+        font-size:23.9476px
+    }
+}
+
+@media screen and (max-width: 639px) {
+    html {
+        font-size:23.5792px
+    }
+}
+
+@media screen and (max-width: 629px) {
+    html {
+        font-size:23.2108px
+    }
+}
+
+@media screen and (max-width: 619px) {
+    html {
+        font-size:22.8424px
+    }
+}
+
+@media screen and (max-width: 609px) {
+    html {
+        font-size:22.474px
+    }
+}
+
+@media screen and (max-width: 599px) {
+    html {
+        font-size:22.1056px
+    }
+}
+
+@media screen and (max-width: 589px) {
+    html {
+        font-size:21.7372px
+    }
+}
+
+@media screen and (max-width: 579px) {
+    html {
+        font-size:21.3688px
+    }
+}
+
+@media screen and (max-width: 569px) {
+    html {
+        font-size:21.0004px
+    }
+}
+
+@media screen and (max-width: 559px) {
+    html {
+        font-size:20.632px
+    }
+}
+
+@media screen and (max-width: 549px) {
+    html {
+        font-size:20.2636px
+    }
+}
+
+@media screen and (max-width: 539px) {
+    html {
+        font-size:19.8952px
+    }
+}
+
+@media screen and (max-width: 529px) {
+    html {
+        font-size:19.5268px
+    }
+}
+
+@media screen and (max-width: 519px) {
+    html {
+        font-size:19.1584px
+    }
+}
+
+@media screen and (max-width: 509px) {
+    html {
+        font-size:18.79px
+    }
+}
+
+@media screen and (max-width: 499px) {
+    html {
+        font-size:18.4216px
+    }
+}
+
+@media screen and (max-width: 489px) {
+    html {
+        font-size:18.0532px
+    }
+}
+
+@media screen and (max-width: 479px) {
+    html {
+        font-size:17.6848px
+    }
+}
+
+@media screen and (max-width: 469px) {
+    html {
+        font-size:17.3164px
+    }
+}
+
+@media screen and (max-width: 459px) {
+    html {
+        font-size:16.948px
+    }
+}
+
+@media screen and (max-width: 449px) {
+    html {
+        font-size:16.5796px
+    }
+}
+
+@media screen and (max-width: 439px) {
+    html {
+        font-size:16.2112px
+    }
+}
+
+@media screen and (max-width: 429px) {
+    html {
+        font-size:15.8428px
+    }
+}
+
+@media screen and (max-width: 419px) {
+    html {
+        font-size:15.4744px
+    }
+}
+
+@media screen and (max-width: 409px) {
+    html {
+        font-size:15.106px
+    }
+}
+
+@media screen and (max-width: 399px) {
+    html {
+        font-size:14.7376px
+    }
+}
+
+@media screen and (max-width: 389px) {
+    html {
+        font-size:14.3692px
+    }
+}
+
+@media screen and (max-width: 379px) {
+    html {
+        font-size:14.0008px
+    }
+}
+
+@media screen and (max-width: 369px) {
+    html {
+        font-size:13.6324px
+    }
+}
+
+@media screen and (max-width: 359px) {
+    html {
+        font-size:13.264px
+    }
+}
+
+@media screen and (max-width: 349px) {
+    html {
+        font-size:12.8956px
+    }
+}
+
+@media screen and (max-width: 339px) {
+    html {
+        font-size:12.5272px
+    }
+}
+
+@media screen and (max-width: 329px) {
+    html {
+        font-size:12.1588px
+    }
+}
+
+html, body {
+height: 100%;
+margin:0;
+}
+input:focus, button:focus {
+    outline:none;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    font-family: "Roboto", "Noto Sans KR", 'AppleGothicNeoSD', 'Apple SD 산돌고딕 Neo', 'Droid sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: -.7px
+}
+
+img,button {
+    border: 0
+}
+.page-title {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 1;
+    font-size: 1rem;
+    position: relative;
+    margin: .46428571rem 1.14285714rem 1.42857143rem;
+    border-bottom: .07142857rem solid rgba(34, 34, 34, 1);
+
+}
+.page-title h1 {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 1;
+    font-size: 1rem;
+    font-size: 1.85714286rem;
+    color: #222;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 2.39285714rem;
+    margin-bottom: 1.06428571rem;
+}
+.wrap {
+    display: flex;
+    flex-direction: column;
+}
+.wrap .header {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width:100%;
+    max-height: 4rem;
+    height: 4rem;
+}
+.close {
+    background-image: url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='33' height='33'%3E%3Cpath fill='rgba(34, 34, 34, 1)' fill-rule='evenodd' d='M18.89 16.937l12.626 12.626c.781.781.781 2.047 0 2.828-.781.781-2.047.781-2.828 0L15.992 19.696 3.402 32.392c-.773.78-2.027.78-2.8 0-.772-.779-.772-2.043 0-2.822l12.496-12.602L.633 4.399c-.773-.78-.773-2.044 0-2.823.773-.78 2.027-.78 2.799 0L15.961 14.21 28.656 1.514c.781-.781 2.048-.781 2.829 0 .781.781.781 2.048 0 2.829L18.89 16.937z'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: .96428571rem;
+    background-color: transparent;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    letter-spacing: -.03571429rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-position: 50%;
+    position:absolute;
+    right:0;
+    top:0;
+}
+.close span {
+    overflow: hidden;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+}
+.content {
+    margin: .46428571rem 1.14285714rem 1.42857143rem;
+}
+.content strong {
+    font-size: 1.42857143rem;
+    color: #333;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.85714286rem;
+    margin-right: 1.78571429rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-weight: 500;
+}
+.description {
+    margin: 1rem 0;
+}
+.description p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1;
+
+    font-size: 1rem;
+    color: #333;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5;
+}
+
+.tip-header {
+    margin:1rem 0;
+    color: rgba(0, 0, 0, 1);
+    text-decoration: none;
+    font-size: 1rem;
+    font-size: .85714286rem;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    line-height: 1.42857143rem;
+    padding: 0 .53571429rem;
+    border-radius: .71428571rem;
+    white-space: nowrap;
+    text-align: center;
+    letter-spacing: 0;
+    background-color: rgba(0, 115, 240, 1);
+}
+.tip-body {
+
+        margin: 0 0 0 0.5rem;
+        padding: 0;
+        box-sizing: border-box;
+        line-height: 1;
+        font-size: 1rem;
+        color: #333;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 2;
+
+}
+.tip-body span{
+    padding-right: 0.4rem;
+    color:rgba(0,115,240,1);
+}
+video {
+    width:100%;
+}
