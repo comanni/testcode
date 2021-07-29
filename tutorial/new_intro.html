@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="kr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="description" content="wyd editor tutorial" />
+        <link rel="stylesheet" href="./intro.css" />
+        <title>wyd editor Tutorial</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-16S6MHJ4WE"></script>
+        <style></style>
+        <!-- Google Tag Manager -->
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != "dataLayer" ? "&l=" + l : "";
+                j.async = true;
+                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, "script", "dataLayer", "GTM-WFGVSSN");
+        </script>
+        <!-- End Google Tag Manager -->
+        <script>
+            function searchParam(key) {
+                return new URLSearchParams(location.search).get(key);
+            }
+
+            const URL = "index.html";
+            let chkNewUser;
+            let chkDevice;
+            if (searchParam("newUser") === "true") {
+                chkNewUser = "true";
+            } else {
+                chkNewUser = "false";
+            }
+
+            const UA = navigator.userAgent.toLowerCase();
+            if (UA.indexOf("android") > -1) {
+                chkDevice = "AOS";
+            } else if (UA.indexOf("iphone") > -1 || UA.indexOf("ipad") > -1 || UA.indexOf("ipod") > -1) {
+                chkDevice = "iOS";
+            } else {
+                chkDevice = "AOS";
+            }
+
+            // if (searchParam("device") === "iOS") {
+            //   chkDevice = "iOS";
+            // } else {
+            //   chkDevice = "AOS";
+            // }
+            const GoTutorial = (typeID) => {
+                let tutorialURL = `${URL}?type=${typeID}&newUser=${chkNewUser}&device=${chkDevice}`;
+                document.location.href = tutorialURL;
+            };
+            const GoIndividual = () => {
+                let tutorialURL = `individual.html?newUser=${chkNewUser}&device=${chkDevice}`;
+                document.location.href = tutorialURL;
+            };
+            function exit() {
+                const UA = navigator.userAgent.toLowerCase();
+                if (UA.indexOf("android") > -1) {
+                    window.android.closePopupWindow();
+                } else if (UA.indexOf("iphone") > -1 || UA.indexOf("ipad") > -1 || UA.indexOf("ipod") > -1) {
+                    window.webkit.messageHandlers.closePopupWindow.postMessage("");
+                }
+            }
+            function layerToggle(){
+                let layerWrap = document.querySelector(".layer-wrap")
+                let selectDimmed = document.querySelector(".select-dimmed")
+                
+                layerWrap.classList.toggle("on")
+                layerWrap.classList.toggle("off")
+                selectDimmed.classList.toggle("on")
+                selectDimmed.classList.toggle("off")
+            }
+            function goToPage(pageName){
+                window.location.href = "./"+pageName+".html"
+            }
+
+            function goToEventPage(pageName){
+                window.location.href = "https://m.wyd.co.kr/event/event/view/"+pageName
+            }
+            // 본인에게 맞는 편집 스타일을 선택해보세요. 필요한 기능만 콕 찝어 알려드릴께요.
+            // 인플루언서, 더빙, 자막, 하나하나 살펴볼래요.
+        </script>
+    </head>
+    <body>
+        <!-- <div class="header">
+            <ul>
+                <li class="btn-back">
+                     <button type="button"><span class="offscreen">이전 페이지</span></button> 
+                </li>
+            </ul>
+        </div> -->
+        <div class="video">
+             <video muted autoplay loop>
+                <source src="./video/test.mp4" type="video/mp4">
+                <strong>Your browser does not support the video tag.</strong>
+            </video>
+        </div>
+        <div class="main_new">
+            <div class="header">
+                <button class="close white" type="button" onclick="exit()"><span>txt</span></button>
+            </div>
+            <div class="title_wrap">
+                <div class="title">wyd editor</div>
+                <div class="body">
+                    <p>손쉽게 편집툴을 활용해</p>
+                    <p>나만의 리뷰를 만들어보세요</p>
+                </div>
+            </div>
+            <div class="wrap mh-10">
+                <div class="btn-area">
+                    <button class="button line" onclick="goToPage('guide_video')">가이드 영상 확인하기</button>
+                </div>
+                <div class="btn-area mt-10">
+                    <button class="button primary" onclick="layerToggle()">튜토리얼 시작하기</button>
+                </div>
+                <div class="mh-10 btn-txt" onclick="goToEventPage('382')">찐리뷰 시즌 7 이벤트 유의사항 확인하기</div>
+            </div>
+        </div>
+
+        <div class="layer-wrap off">
+            <div class="top">
+                <strong>튜토리얼 선택하기</strong>
+                <button class="close" type="button" onclick="layerToggle()"><span>닫기</span></button>
+            </div>
+            <div>
+                <div class="text">
+                    <p>본인에게 맞는 편집 스타일을 선택해보세요. </br> 필요한 기능만 콕 찝어 알려드릴께요.</p>
+                </div>
+
+                <div class="button-wrap">
+                    <div class="button" onclick="GoTutorial('influencer')"><div class="title">인플루언서</div><div class="icon"></div><div class="step">12단계</div></div>
+                    <div class="button" onclick="GoTutorial('dubbing')"><div class="title">Only 더빙</div><div class="icon"></div><div class="step">8단계</div></div>
+                    <div class="button" onclick="GoTutorial('chobo')"><div class="title">Only 자막</div><div class="icon"></div><div class="step">9단계</div></div>
+                </div>
+                <div class="mh-15 btn-txt" onclick="GoIndividual()">하나하나 살펴볼래요</div>
+            </div>
+        </div>
+        <div class="select-dimmed off" onclick="layerToggle()"></div>
+    </body>
+</html>
