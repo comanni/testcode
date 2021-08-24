@@ -3,18 +3,20 @@ function goAppstore() {
     let chkDevice = "";
     if (UA.indexOf("android") > -1) {
         chkDevice = "AOS";
-    } else if (UA.indexOf("iphone") > -1 || UA.indexOf("ipad") > -1 || UA.indexOf("ipod") > -1) {
+    } else if (UA.indexOf("iphone") > -1 || UA.indexOf("ipad") > -1 || UA.indexOf("ipod") > -1 || UA.indexOf('macintosh') > -1 && 'ontouchend' in document) {
         chkDevice = "iOS";
     } else {
         chkDevice = "PC";
     }
+
+    //onst isiOS = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('macintosh') > -1 && 'ontouchend' in document
     const marketUrl = {
         AOS: "market://details?id=com.lottehomeshopping.vc",
         iOS: "itms-apps://itunes.apple.com/app/itunes-u/1513855078?ls=1&mt=8&action=write-review",
         PC: "https://play.google.com/store/apps/details?id=com.lottehomeshopping.vc",
     };
     if (marketUrl.hasOwnProperty(chkDevice)) {
-        window.location = marketUrl[chkDevice];
+        window.location.replace = marketUrl[chkDevice];
     }
 }
 
