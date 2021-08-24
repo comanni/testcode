@@ -1,0 +1,393 @@
+/* CSS 기본값 리셋을 위한 코드 */
+@import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  background-color: rgba(0,0,0,0) ;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+html {
+  font-size: 16px;
+}
+body {
+  line-height: 1;
+  font-family: 'Roboto', 'Noto Sans KR', 'AppleGothicNeoSD', 'Apple SD Gothic Neo,', 'Droid Sans', sans-serif !important;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+@media screen and (min-width: 750px) {
+    :root {
+      background: #fff
+    }
+  
+    html {
+      font-size: 28px;
+  
+    }
+  
+  }
+  
+  @media screen and (max-width: 749px) {
+    html {
+      font-size: 27.6316px
+    }
+
+  }
+  
+  @media screen and (max-width: 739px) {
+    html {
+      font-size: 27.2632px
+    }
+  }
+  
+  @media screen and (max-width: 729px) {
+    html {
+      font-size: 26.8948px
+    }
+  }
+  
+  @media screen and (max-width: 719px) {
+    html {
+      font-size: 26.5264px
+    }
+  }
+  
+  @media screen and (max-width: 709px) {
+    html {
+      font-size: 26.158px
+    }
+  }
+  
+  @media screen and (max-width: 699px) {
+    html {
+      font-size: 25.7896px
+    }
+  }
+  
+  @media screen and (max-width: 689px) {
+    html {
+      font-size: 25.4212px
+    }
+  }
+  
+  @media screen and (max-width: 679px) {
+    html {
+      font-size: 25.0528px
+    }
+  }
+  
+  @media screen and (max-width: 669px) {
+    html {
+      font-size: 24.6844px
+    }
+  }
+  
+  @media screen and (max-width: 659px) {
+    html {
+      font-size: 24.316px
+    }
+  }
+  
+  @media screen and (max-width: 649px) {
+    html {
+      font-size: 23.9476px
+    }
+  }
+  
+  @media screen and (max-width: 639px) {
+    html {
+      font-size: 23.5792px
+    }
+  }
+  
+  @media screen and (max-width: 629px) {
+    html {
+      font-size: 23.2108px
+    }
+  }
+  
+  @media screen and (max-width: 619px) {
+    html {
+      font-size: 22.8424px
+    }
+  }
+  
+  @media screen and (max-width: 609px) {
+    html {
+      font-size: 22.474px
+    }
+  }
+  
+  @media screen and (max-width: 599px) {
+    html {
+      font-size: 22.1056px
+    }
+  }
+  
+  @media screen and (max-width: 589px) {
+    html {
+      font-size: 21.7372px
+    }
+  }
+  
+  @media screen and (max-width: 579px) {
+    html {
+      font-size: 21.3688px
+    }
+  }
+  
+  @media screen and (max-width: 569px) {
+    html {
+      font-size: 21.0004px
+    }
+  }
+  
+  @media screen and (max-width: 559px) {
+    html {
+      font-size: 20.632px
+    }
+  }
+  
+  @media screen and (max-width: 549px) {
+    html {
+      font-size: 20.2636px
+    }
+  }
+  
+  @media screen and (max-width: 539px) {
+    html {
+      font-size: 19.8952px
+    }
+  }
+  
+  @media screen and (max-width: 529px) {
+    html {
+      font-size: 19.5268px
+    }
+  }
+  
+  @media screen and (max-width: 519px) {
+    html {
+      font-size: 19.1584px
+    }
+  }
+  
+  @media screen and (max-width: 509px) {
+    html {
+      font-size: 18.79px
+    }
+  }
+  
+  @media screen and (max-width: 499px) {
+    html {
+      font-size: 18.4216px
+    }
+  }
+  
+  @media screen and (max-width: 489px) {
+    html {
+      font-size: 18.0532px
+    }
+  }
+  
+  @media screen and (max-width: 479px) {
+    html {
+      font-size: 17.6848px
+    }
+  }
+  
+  @media screen and (max-width: 469px) {
+    html {
+      font-size: 17.3164px
+    }
+  }
+  
+  @media screen and (max-width: 459px) {
+    html {
+      font-size: 16.948px
+    }
+  }
+  
+  @media screen and (max-width: 449px) {
+    html {
+      font-size: 16.5796px
+    }
+  }
+  
+  @media screen and (max-width: 439px) {
+    html {
+      font-size: 16.2112px
+    }
+  }
+  
+  @media screen and (max-width: 429px) {
+    html {
+      font-size: 15.8428px
+    }
+  }
+  
+  @media screen and (max-width: 419px) {
+    html {
+      font-size: 15.4744px
+    }
+  }
+  
+  @media screen and (max-width: 409px) {
+    html {
+      font-size: 15.106px
+    }
+  }
+  
+  @media screen and (max-width: 399px) {
+    html {
+      font-size: 14.7376px
+    }
+  }
+  
+  @media screen and (max-width: 389px) {
+    html {
+      font-size: 14.3692px
+    }
+  }
+  
+  @media screen and (max-width: 379px) {
+    html {
+      font-size: 14.0008px
+    }
+  }
+  
+  @media screen and (max-width: 369px) {
+    html {
+      font-size: 13.6324px
+    }
+  }
+  
+  @media screen and (max-width: 359px) {
+    html {
+      font-size: 13.264px
+    }
+  }
+  
+  @media screen and (max-width: 349px) {
+    html {
+      font-size: 12.8956px
+    }
+  }
+  
+  @media screen and (max-width: 339px) {
+    html {
+      font-size: 12.5272px
+    }
+  }
+  
+  @media screen and (max-width: 329px) {
+    html {
+      font-size: 12.1588px
+    }
+  }
+.logo {
+    width: 7rem;
+    margin:1.5rem;
+  }
+
+  .button-wrap {
+      display:flex;
+      flex-direction: row;
+      width:100%;
+      justify-content: space-between;
+      /* background-color: rgb(245, 245, 245); */
+      padding: 1rem;
+      border-radius: 1rem;
+  }
+
+  h2 {
+    font-weight: 700;
+    color: #000;
+    line-height: 49px;
+  }
+  h3 {
+      line-height: 1.6;
+  }
+  .title-big {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: -1.5px;
+
+  }
+.title-gray {
+    color:#333333;
+}
+  article {
+      display:flex;
+      flex-direction: column;
+  }
+.button {
+    width: 30%;
+    text-align:center;
+}
+  .image {
+      font-size:3rem;
+      color: rgb(134, 134, 134);
+  }
+
+  .text{
+      font-size:1.5rem;
+  }
+
+  .modal-max {
+    width: calc(100vw - 1rem) !important;
+    max-width: 100% !important;
+}
+
+.modal-body-text {
+
+    line-height:1.6;
+    text-align:center;
+}
+.modal-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.margin-center-auto {
+    margin: auto 0;
+}
+
+textarea{
+  resize: none !important;
+}

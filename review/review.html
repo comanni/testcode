@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./review_style.css" />
+
+        <!-- JavaScript Bundle with Popper -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+            crossorigin="anonymous"
+        ></script>
+        <!-- CSS only -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+            crossorigin="anonymous"
+        />
+        <script src="https://kit.fontawesome.com/f09ea846e4.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <input type="hidden" id="selectedType" value="">
+        <header>
+            <img src="./logo_vertical_blue.png" class="logo" alt="와이드 로고">
+        </header>
+        <main>
+            <article>
+                <section class="ms-4 mt-4"> <!-- 타이틀 문구-->
+                    <h1 class="title-big">wyd가 더 발전할 수 있도록</br>의견을 남겨주세요.</h1>
+                    <!--메인타이틀-->
+                    <h3 class="mt-5 title-gray">10초면 충분해요!</h3>
+                    <!--서브타이틀-->
+                </section> 
+                <section class="ms-4 me-4" style="margin-top:3rem;border-top: 1px solid #dddddd;" > <!--버튼 영역-->
+                    <!-- <h2>앱에 대해 평가해주세요.</h2> -->
+                    <!--서브타이틀-->
+                    <!--버튼-->
+                    <div class="button-wrap mt-5">
+                        <div class="button" onclick="openModal('modalSorry', '1')">
+                            <div class="image"><i class="fas fa-thumbs-down"></i></div>
+                            <div class="text mt-2">문제가 있어요</div>
+                        </div>
+                        <div class="button" onclick="openModal('modalSorry', '2')">
+                            <div class="image"><i class="fas fa-meh"></i></div>
+                            <div class="text mt-2">그저 그래요</div>
+                        </div>
+                        <div class="button" onclick="openModal('modalThanks', '3')">
+                            <div class="image"><i class="fas fa-thumbs-up"></i></div>
+                            <div class="text mt-2">좋아요</div>
+                        </div>
+                    </div>
+                </section> 
+            </article>
+            
+        </main>
+        <div class="modal" id="modalThanks" aria-hidden="true" aria-labelledby="modalThanks" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">제출 완료</h5>
+                  <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body modal-flex">
+                    <div class="margin-center-auto">
+                        <h3 class="modal-body-text">좋은 의견 감사합니다.</br>앱스토어에도 칭찬을 남겨주실 수 있나요?</h3>
+                  </div>
+                      <div class="d-grid gap-3 mx-auto" style="width:100%">
+                        <button class="btn btn-primary btn-lg" type="button" onclick="goAppstore()">앱스토어에 리뷰 남기기</button>
+                        <button class="btn btn-outline-primary btn-lg" onclick="openComment()">추가의견 작성하기</button>
+                      </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="modalSorry" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">제출 완료</h5>
+                  <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body modal-flex">
+                    <div class="margin-center-auto">
+                      <h3 class="modal-body-text">죄송합니다.</br>더 나은 서비스를 만들기 위해 불편한 점이나</br>건의사항을 저희에게 알려주세요.</h3>
+                      <textarea class="form-control mt-5" id="sorryTextarea" rows="6" oninput="textChange(this)"></textarea>
+                      <p class="mt-3">피드백이 필요하신 경우 wyd App > My Page > 고객센터 > 1:1 문의를 통해 요청해주세요.</p>
+                    </div>
+                    <div class="d-grid gap-3 mx-auto" style="width:100%">
+                        <button class="btn btn-primary btn-lg submit" disabled type="button" onclick='commentSubmit("sorryTextarea")'>내용을 작성해주세요</button>
+
+                      </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="modalThanksComment" aria-hidden="true" aria-labelledby="modalThanksComment" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">제출 완료</h5>
+                  <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body modal-flex">
+                    <div class="margin-center-auto">
+                      <h3 class="modal-body-text">좋은 의견 감사합니다.</br>더 나은 서비스를 만들기 위해</br>추가적인 의견을 알려주세요.</h3>
+                      <textarea class="form-control mt-5" id="thanksTextarea" rows="6" oninput="textChange(this)"></textarea>
+                      <p class="mt-3">피드백이 필요하신 경우 wyd App > My Page > 고객센터 > 1:1 문의를 통해 요청해주세요.</p>
+                    </div>
+                    <div class="d-grid gap-3 mx-auto" style="width:100%">
+                        <button class="btn btn-primary btn-lg submit" disabled type="button" onclick='commentSubmit("thanksTextarea")'>내용을 작성해주세요</button>
+
+                      </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="finish" aria-hidden="true" aria-labelledby="modalThanks" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">제출 완료</h5>
+                  <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body modal-flex">
+                    <div class="margin-center-auto">
+                        <h3 class="modal-body-text">의견 남겨주셔서 감사합니다.</h3>
+                  </div>
+                      <div class="d-grid gap-3 mx-auto" style="width:100%">
+
+                        <button class="btn btn-outline-primary btn-lg">와이드 살펴보기</button>
+                      </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <script src="./review_common.js"></script>
+    </body>
+</html>
