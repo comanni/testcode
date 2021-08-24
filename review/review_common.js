@@ -1,22 +1,30 @@
 function goAppstore() {
     const UA = navigator.userAgent.toLowerCase();
     let chkDevice = "";
+
     if (UA.indexOf("android") > -1) {
         chkDevice = "AOS";
-    } else if (UA.indexOf("iphone") > -1 || UA.indexOf("ipad") > -1 || UA.indexOf("ipod") > -1 || UA.indexOf('macintosh') > -1 && 'ontouchend' in document) {
+    } else if (UA.indexOf("iphone") > -1 || UA.indexOf("ipad") > -1 || UA.indexOf("ipod") > -1 || UA.indexOf('macintosh') > -1  && 'ontouchend' in document) {
         chkDevice = "iOS";
     } else {
         chkDevice = "PC";
     }
-
+    if (chkDevice === "iOS" && UA.indexOf("kakaotalk")) {
+        chkDevice = "iOSKakao"
+    }
     //onst isiOS = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('macintosh') > -1 && 'ontouchend' in document
     const marketUrl = {
         AOS: "market://details?id=com.lottehomeshopping.vc",
         iOS: "itms-apps://itunes.apple.com/app/itunes-u/1513855078?ls=1&mt=8&action=write-review",
         PC: "https://play.google.com/store/apps/details?id=com.lottehomeshopping.vc",
+        iOSKakao : "https://itunes.apple.com/kr/app/jellidaesi/id1513855078?mt=8&action=write-review"
     };
+    alert(UA, chkDevice)
     if (marketUrl.hasOwnProperty(chkDevice)) {
-        window.location.replace = marketUrl[chkDevice];
+
+        try{window.location = marketUrl[chkDevice];}
+        catch{console.log("error")}
+
     }
 }
 
