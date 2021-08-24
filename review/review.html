@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <meta charset="utf-8">
+      <title>와이드 간단 설문조사</title>
+      <meta property="og:type" content="website" />
+<meta property="og:title" content="와이드 간단 설문조사" />
+<meta property="og:site_name" content="wyd" />
+<meta property="og:url" content="https://introduce.wyd.co.kr/survey" />
+<meta property="og:image" content="https://comanni.github.io/testcode/review/kakao_survey.jpg" />
+<meta property="og:image:width" content="800" /><!--생략가능-->
+<meta property="og:image:height" content="400" /><!--생략가능-->
         <link rel="stylesheet" href="./review_style.css" />
 
         <!-- JavaScript Bundle with Popper -->
@@ -64,7 +73,7 @@
                     <div class="margin-center-auto">
                         <h3 class="modal-body-text">좋은 의견 감사합니다.</br>앱스토어에도 칭찬을 남겨주실 수 있나요?</h3>
                   </div>
-                      <div class="d-grid gap-3 mx-auto" style="width:100%">
+                      <div class="d-grid gap-3 mx-auto" style="width:100%;margin-bottom:6rem">
                         <button class="btn btn-primary btn-lg" type="button" onclick="goAppstore()">앱스토어에 리뷰 남기기</button>
                         <button class="btn btn-outline-primary btn-lg" onclick="openComment()">추가의견 작성하기</button>
                       </div>
@@ -86,7 +95,7 @@
                       <textarea class="form-control mt-5" id="sorryTextarea" rows="6" oninput="textChange(this)"></textarea>
                       <p class="mt-3">피드백이 필요하신 경우 wyd App > My Page > 고객센터 > 1:1 문의를 통해 요청해주세요.</p>
                     </div>
-                    <div class="d-grid gap-3 mx-auto" style="width:100%">
+                    <div class="d-grid gap-3 mx-auto" style="width:100%;margin-bottom:6rem">
                         <button class="btn btn-primary btn-lg submit" disabled type="button" onclick='commentSubmit("sorryTextarea")'>내용을 작성해주세요</button>
 
                       </div>
@@ -108,7 +117,7 @@
                       <textarea class="form-control mt-5" id="thanksTextarea" rows="6" oninput="textChange(this)"></textarea>
                       <p class="mt-3">피드백이 필요하신 경우 wyd App > My Page > 고객센터 > 1:1 문의를 통해 요청해주세요.</p>
                     </div>
-                    <div class="d-grid gap-3 mx-auto" style="width:100%">
+                    <div class="d-grid gap-3 mx-auto" style="width:100%;margin-bottom:6rem">
                         <button class="btn btn-primary btn-lg submit" disabled type="button" onclick='commentSubmit("thanksTextarea")'>내용을 작성해주세요</button>
 
                       </div>
@@ -128,9 +137,9 @@
                     <div class="margin-center-auto">
                         <h3 class="modal-body-text">의견 남겨주셔서 감사합니다.</h3>
                   </div>
-                      <div class="d-grid gap-3 mx-auto" style="width:100%">
+                      <div class="d-grid gap-3 mx-auto" style="width:100%;margin-bottom:6rem">
 
-                        <button class="btn btn-outline-primary btn-lg">와이드 살펴보기</button>
+                        <button class="btn btn-primary btn-lg">와이드 살펴보기</button>
                       </div>
                 </div>
 
