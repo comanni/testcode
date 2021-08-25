@@ -12,14 +12,14 @@ function goAppstore() {
     if (chkDevice === "iOS" && UA.indexOf("kakaotalk")) {
         chkDevice = "iOSKakao"
     }
-    //onst isiOS = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('macintosh') > -1 && 'ontouchend' in document
+
     const marketUrl = {
         AOS: "market://details?id=com.lottehomeshopping.vc",
         iOS: "itms-apps://itunes.apple.com/app/itunes-u/1513855078?ls=1&mt=8&action=write-review",
         PC: "https://play.google.com/store/apps/details?id=com.lottehomeshopping.vc",
         iOSKakao : "https://itunes.apple.com/kr/app/jellidaesi/id1513855078?mt=8&action=write-review"
     };
-    alert(UA, chkDevice)
+
     if (marketUrl.hasOwnProperty(chkDevice)) {
 
         try{window.location = marketUrl[chkDevice];}
@@ -72,25 +72,19 @@ modalList.forEach(id => {
         setStorage();
     });
 })
-// let thanksModal = document.getElementById("modalThanks");
-// thanksModal.addEventListener("show.bs.modal", function (event) {
-//     // do something...
-//     //   localStorage.setItem("isFinished", "true")
-//     //   localStorage.setItem("selectedType", "3")
-//     //   ratingSubmit("3")
-//     setStorage();
-// });
-
-// let sorryModal = document.getElementById("modalSorry");
-// sorryModal.addEventListener("shown.bs.modal", function (event) {
-//     // do something...
-
-//     //   let type = document.getElementById("selectedType")
-//     //   localStorage.setItem("isFinished", "true")
-//     //   localStorage.setItem("selectedType", type.value)
-//     //   ratingSubmit(type.value)
-//     setStorage();
-// });
+// async function ajaxGetSend(URL){
+//         let xhr = new XMLHttpRequest();
+//     xhr.onload = function () {
+//         if (xhr.status === 200 || xhr.status === 201) {
+//             console.log(xhr.responseText);
+//         }
+//     };
+//     xhr.onerror = function () {
+//         console.error(xhr.responseText);
+//     };
+//     xhr.open("GET", URL);
+//     xhr.send();
+// }
 function ratingSubmit(selectedType) {
     let xhr = new XMLHttpRequest();
     const UA = navigator.userAgent.toLowerCase();
@@ -106,6 +100,7 @@ function ratingSubmit(selectedType) {
     };
     xhr.open("GET", URL);
     xhr.send();
+    ajaxGetSend(URL)
 }
 
 function commentSubmit(id) {
@@ -130,6 +125,7 @@ function commentSubmit(id) {
     };
     xhr.open("GET", URL);
     xhr.send();
+    // ajaxGetSend(URL).then(e => openModal("finish"))
 }
 
 function textChange(e) {
