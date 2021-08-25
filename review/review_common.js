@@ -141,7 +141,9 @@ function textChange(e) {
         });
     }
 }
-
+function appLink() {
+    window.location = "https://OnzpHzOCLkKZB9F1KXyd7w.adtouch.adbrix.io/api/v1/click/O80020qgaEiWt9Hpy5slDA?deeplink_custom_path=ndp-wyd%3A%2F%2Fwyd?adv_adgroup=MAIN&adv_keyword=%EC%95%B1%ED%8F%89%EA%B0%80%EC%9A%94%EC%B2%AD"
+}
 function init() {
     let isFinished = localStorage.getItem("isFinished");
     let selectedType = localStorage.getItem("selectedType");
@@ -150,3 +152,4 @@ function init() {
     }
 }
 init();
+
