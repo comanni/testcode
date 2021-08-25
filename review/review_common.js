@@ -72,27 +72,13 @@ modalList.forEach(id => {
         setStorage();
     });
 })
-// async function ajaxGetSend(URL){
-//         let xhr = new XMLHttpRequest();
-//     xhr.onload = function () {
-//         if (xhr.status === 200 || xhr.status === 201) {
-//             console.log(xhr.responseText);
-//         }
-//     };
-//     xhr.onerror = function () {
-//         console.error(xhr.responseText);
-//     };
-//     xhr.open("GET", URL);
-//     xhr.send();
-// }
-function ratingSubmit(selectedType) {
-    let xhr = new XMLHttpRequest();
-    const UA = navigator.userAgent.toLowerCase();
-    let URL = "https://script.google.com/macros/s/AKfycbzQ9ZP96-eOzRL1EAHaF_-JV0ZY-YEcoGxApRSb7btiqPmF5RC7kVf-iGPgGWaqV_WRpw/exec";
-    URL += "?selectedType=" + selectedType + "&UA=" + UA;
+async function ajaxGetSend(URL, type){
+    URL += "&type=" + type
+        let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
             console.log(xhr.responseText);
+            type === "finish" ? openModal("finish") : '';
         }
     };
     xhr.onerror = function () {
@@ -100,7 +86,24 @@ function ratingSubmit(selectedType) {
     };
     xhr.open("GET", URL);
     xhr.send();
-    ajaxGetSend(URL)
+    
+}
+function ratingSubmit(selectedType) {
+    // let xhr = new XMLHttpRequest();
+    const UA = navigator.userAgent.toLowerCase();
+    let URL = "https://script.google.com/macros/s/AKfycbzQ9ZP96-eOzRL1EAHaF_-JV0ZY-YEcoGxApRSb7btiqPmF5RC7kVf-iGPgGWaqV_WRpw/exec";
+    URL += "?selectedType=" + selectedType + "&UA=" + UA;
+    // xhr.onload = function () {
+    //     if (xhr.status === 200 || xhr.status === 201) {
+    //         console.log(xhr.responseText);
+    //     }
+    // };
+    // xhr.onerror = function () {
+    //     console.error(xhr.responseText);
+    // };
+    // xhr.open("GET", URL);
+    // xhr.send();
+    ajaxGetSend(URL,"rating")
 }
 
 function commentSubmit(id) {
@@ -108,24 +111,24 @@ function commentSubmit(id) {
         e.removeAttribute("disabled");
         e.innerText = "설문 제출 중입니다";
     });
-    let xhr = new XMLHttpRequest();
+    // let xhr = new XMLHttpRequest();
     let selectedType = localStorage.getItem("selectedType");
     const UA = navigator.userAgent.toLowerCase();
     let opinion = encodeURIComponent(document.querySelector(`#${id}`).value);
     let URL = "https://script.google.com/macros/s/AKfycbzQ9ZP96-eOzRL1EAHaF_-JV0ZY-YEcoGxApRSb7btiqPmF5RC7kVf-iGPgGWaqV_WRpw/exec";
     URL += "?selectedType=" + selectedType + "&opinion=" + opinion + "&UA=" + UA;
-    xhr.onload = function () {
-        if (xhr.status === 200 || xhr.status === 201) {
-            console.log(xhr.responseText);
-            openModal("finish");
-        }
-    };
-    xhr.onerror = function () {
-        console.error(xhr.responseText);
-    };
-    xhr.open("GET", URL);
-    xhr.send();
-    // ajaxGetSend(URL).then(e => openModal("finish"))
+    // xhr.onload = function () {
+    //     if (xhr.status === 200 || xhr.status === 201) {
+    //         console.log(xhr.responseText);
+    //         openModal("finish");
+    //     }
+    // };
+    // xhr.onerror = function () {
+    //     console.error(xhr.responseText);
+    // };
+    // xhr.open("GET", URL);
+    // xhr.send();
+    ajaxGetSend(URL, "finish")
 }
 
 function textChange(e) {
@@ -150,6 +153,20 @@ function init() {
     if (isFinished === "true" && selectedType !== "3") {
         openModal("finish");
     }
+    // let xhr = new XMLHttpRequest();
+    let URL = "https://script.google.com/macros/s/AKfycbzQ9ZP96-eOzRL1EAHaF_-JV0ZY-YEcoGxApRSb7btiqPmF5RC7kVf-iGPgGWaqV_WRpw/exec";
+    // xhr.onload = function () {
+    //     if (xhr.status === 200 || xhr.status === 201) {
+    //         console.log(xhr.responseText);
+    //         openModal("finish");
+    //     }
+    // };
+    // xhr.onerror = function () {
+    //     console.error(xhr.responseText);
+    // };
+    // xhr.open("GET", URL);
+    // xhr.send();
+    ajaxGetSend(URL, "open")
 }
 init();
 
