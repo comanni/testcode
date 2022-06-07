@@ -28,7 +28,7 @@ const ltalk = {
     room_title: "",
     oRoomInfo: null,
     sRoomID: null,
-    defaultRoomTitle: "프로젝트1셀",
+    defaultRoomTitle: "wyd셀",
     ALERT_TYPE: "0",
 };
 // let rID = User_ID + "|";
